@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import frc.robot.RobotMap;
 import frc.robot.commands.Drive;
 
@@ -17,17 +19,24 @@ import frc.robot.commands.Drive;
  */
 public class DriveBase extends Subsystem {
 
-  private Victor leftMotors;
-  private Victor rightMotors;
+  private PWMVictorSPX leftPWM;
+  private PWMVictorSPX righVictorSPX;
+  private DifferentialDrive drive;
 
   public DriveBase() {
-    leftMotors = new Victor(RobotMap.leftMotorPWM);
-    rightMotors = new Victor(RobotMap.rightMotorPWM);
+    
+    leftPWM = new PWMVictorSPX(RobotMap.leftMotorPWM);
+    righVictorSPX = new PWMVictorSPX(RobotMap.rightMotorPWM);
+
+    drive = new DifferentialDrive(leftPWM, righVictorSPX);
   }
 
   public void setRaw(double leftVal, double rightVal) {
-    leftMotors.set(leftVal);
-    rightMotors.set(rightVal);
+    drive.tankDrive(leftVal, rightVal);
+  }
+
+  public void setArcade(double xSpeed, double zRotation) {
+    drive.arcadeDrive(xSpeed, zRotation);
   }
 
   @Override

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.OI;
 import frc.robot.Robot;
 
@@ -25,13 +26,10 @@ public class Drive extends Command {
   @Override
   protected void execute() {
     
-    double leftThrottle = scaleThrottle(OI.leftJoystick.getThrottle());
-    double rightThrottle = scaleThrottle(OI.rightJoystick.getThrottle());
-
     double leftJoystickVal = OI.leftJoystick.getScaledY();
     double rightJoystickVal = OI.rightJoystick.getScaledY();
 
-    Robot.driveBase.setRaw(leftThrottle * leftJoystickVal, rightThrottle * rightJoystickVal);
+    Robot.driveBase.setRaw(leftJoystickVal, rightJoystickVal);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,9 +47,5 @@ public class Drive extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-  }
-
-  private double scaleThrottle(double throttle) {
-    return (1.0 - throttle) * -0.5;
   }
 }

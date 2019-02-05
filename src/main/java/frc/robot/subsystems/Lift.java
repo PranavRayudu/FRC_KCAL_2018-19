@@ -7,14 +7,24 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Add your docs here.
- */
+import frc.robot.RobotMap;
+
 public class Lift extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+
+  TalonSRX liftPWM;
+
+  public Lift() {
+    liftPWM = new TalonSRX(RobotMap.liftMotorPWM);
+  }
+
+  public void setPwr(double val) {
+    liftPWM.set(ControlMode.PercentOutput, val);
+  }
 
   @Override
   public void initDefaultCommand() {

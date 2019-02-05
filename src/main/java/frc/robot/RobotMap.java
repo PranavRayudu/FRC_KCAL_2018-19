@@ -22,4 +22,7 @@ public class RobotMap {
   // motor ports
   public static final int leftMotorPWM = 0;
   public static final int rightMotorPWM = 1;
+
+  public static final int armMotorPWM = 10;
+  public static final int liftMotorPWM = 11;
 }

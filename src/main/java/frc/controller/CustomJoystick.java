@@ -22,11 +22,13 @@ public class CustomJoystick extends Joystick {
 
     public double getScaledX() {
         double val = getX();
-        return Math.abs(val) < threshold ? 0.0 : val;
+        double throttle = getThrottle();
+        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
     }
 
     public double getScaledY() {
         double val = getY();
-        return Math.abs(val) < threshold ? 0.0 : val;
+        double throttle = getThrottle();
+        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
     }
 }

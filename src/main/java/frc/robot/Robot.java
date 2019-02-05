@@ -25,9 +25,20 @@ public class Robot extends TimedRobot {
   
   @Override
   public void robotInit() {
-    CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
     
+    try {
+      CameraServer.getInstance().startAutomaticCapture(0);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera 0");
+    }
+
+    try {
+      CameraServer.getInstance().startAutomaticCapture(1);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera 1");
+    }
+
+
     oi = new OI();
 
     driveBase = new DriveBase();

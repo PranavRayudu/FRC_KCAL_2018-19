@@ -13,13 +13,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
+import frc.robot.commands.LiftControl;
 
 public class Lift extends Subsystem {
 
   TalonSRX liftPWM;
 
   public Lift() {
-    liftPWM = new TalonSRX(RobotMap.liftMotorPWM);
+    liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
   }
 
   public void setPwr(double val) {
@@ -28,7 +29,6 @@ public class Lift extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new LiftControl());
   }
 }

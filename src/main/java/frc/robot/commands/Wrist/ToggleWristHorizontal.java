@@ -5,16 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.OI;
 import frc.robot.Robot;
 
-public class Drive extends Command {
-  public Drive() {
-    requires(Robot.driveBase);
+public class ToggleWristHorizontal extends Command {
+  public ToggleWristHorizontal() {
+    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
@@ -25,17 +24,13 @@ public class Drive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    double leftJoystickVal = OI.leftJoystick.getScaledY();
-    double rightJoystickVal = OI.rightJoystick.getScaledY();
-
-    Robot.driveBase.setRaw(leftJoystickVal, rightJoystickVal);
+    Robot.wrist.toggleHorizontalSol();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

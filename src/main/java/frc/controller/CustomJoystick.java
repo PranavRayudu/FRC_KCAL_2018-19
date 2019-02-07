@@ -8,27 +8,62 @@
 package frc.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class CustomJoystick extends Joystick {
 
-    static final double threshold = 0.05;
+    private static final double threshold = 0.05;
+
+    public JoystickButton a, b, x, y;
+    public JoystickButton lb, rb;
+    public JoystickButton start, back;
 
     public CustomJoystick(final int port) {
         super(port);
+
+        a = new JoystickButton(this, RobotMap.Joystick.BTN_A);
+        b = new JoystickButton(this, RobotMap.Joystick.BTN_B);
+        x = new JoystickButton(this, RobotMap.Joystick.BTN_X);
+        y = new JoystickButton(this, RobotMap.Joystick.BTN_Y);
+
+        lb = new JoystickButton(this, RobotMap.Joystick.BTN_LB);
+        rb = new JoystickButton(this, RobotMap.Joystick.BTN_RB);
+
+        start = new JoystickButton(this, RobotMap.Joystick.BTN_START);
+        back  = new JoystickButton(this, RobotMap.Joystick.BTN_BACK);
     }
 
-    public double getScaledX() {
-        double val = getX();
-        double throttle = getThrottle();
-        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
+    private double applyThreshold(double val) {
+        return Math.abs(val) < threshold ? 0.0 : val;
     }
 
-    public double getScaledY() {
-        double val = getY();
-        double throttle = getThrottle();
-        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
+    public double rightStickX() {
+        this.getRawAxis(0);
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_X_AXIS));
+    }
+
+    public double rightStickY() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_Y_AXIS));
+    }
+
+    public double leftStickX() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_X_AXIS));
+    }
+
+    public double leftStickY() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_Y_AXIS));
+    }
+
+    public boolean leftTriggerPressed() {
+        return this.getRawAxis(RobotMap.Joystick.TRIGGER) == -1;
+    }
+
+    public boolean rightTriggerPressed() {
+        return this.getRawAxis(RobotMap.Joystick.TRIGGER) == 1;
     }
 }

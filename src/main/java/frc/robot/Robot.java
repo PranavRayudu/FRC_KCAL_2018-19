@@ -9,6 +9,12 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import frc.robot.commands.Wrist.TogglePusher;
+import frc.robot.commands.Wrist.ToggleWristHorizontal;
+import frc.robot.commands.Wrist.ToggleWristVertical;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Lift;
@@ -45,6 +51,13 @@ public class Robot extends TimedRobot {
     lift = new Lift();
     arm = new Arm();
     wrist = new Wrist();
+
+    SmartDashboard.putData(driveBase);
+    SmartDashboard.putData(lift);
+    SmartDashboard.putData(arm);
+    SmartDashboard.putData(wrist);
+
+    System.out.println("Robot has turned on");
   }
 
   @Override
@@ -65,15 +78,24 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() {
-
+    Scheduler.getInstance().run();
   }
 
   @Override
   public void teleopInit() {
+    // although all of these commands are part of the same subsystem, they are instantaneous methods, so they should happen instantly
+    wrist.setCompressor(true);;
+    oi.joystick.lb.whenPressed(new TogglePusher());
+    oi.joystick.rb.whenPressed(new ToggleWristHorizontal());
+    oi.joystick.start.whenPressed(new ToggleWristVertical());
   }
 
   @Override
   public void teleopPeriodic() {
+
+    System.out.println("Robot has started driver control!");
+
+    Scheduler.getInstance().run();
   }
 
   @Override

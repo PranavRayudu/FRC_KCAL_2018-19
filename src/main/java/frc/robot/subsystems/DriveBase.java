@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.Drive;
+import frc.robot.commands.DriveControl;
 
 /**
  * Add your docs here.
@@ -20,15 +20,15 @@ import frc.robot.commands.Drive;
 public class DriveBase extends Subsystem {
 
   private PWMVictorSPX leftPWM;
-  private PWMVictorSPX righVictorSPX;
+  private PWMVictorSPX rightSPX;
   private DifferentialDrive drive;
 
   public DriveBase() {
     
-    leftPWM = new PWMVictorSPX(RobotMap.leftMotorPWM);
-    righVictorSPX = new PWMVictorSPX(RobotMap.rightMotorPWM);
+    leftPWM = new PWMVictorSPX(RobotMap.Motors.LEFT_MOTOR_PWM);
+    rightSPX = new PWMVictorSPX(RobotMap.Motors.RIGHT_MOTOR_PWM);
 
-    drive = new DifferentialDrive(leftPWM, righVictorSPX);
+    drive = new DifferentialDrive(leftPWM, rightSPX);
   }
 
   public void setRaw(double leftVal, double rightVal) {
@@ -41,6 +41,6 @@ public class DriveBase extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new Drive());
+    setDefaultCommand(new DriveControl());
   }
 }

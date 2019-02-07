@@ -31,12 +31,11 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public static CustomJoystick leftJoystick;
-  public static CustomJoystick rightJoystick;
+  public static CustomJoystick joystick;
+  
   
   public OI() {
-    leftJoystick = new CustomJoystick(RobotMap.leftJoyStickPort);
-    rightJoystick = new CustomJoystick(RobotMap.rightJoystickPort);
+    joystick = new CustomJoystick(RobotMap.Joystick.PORT);
   }
 
 

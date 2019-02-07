@@ -9,6 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
+
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Lift;
@@ -45,6 +47,8 @@ public class Robot extends TimedRobot {
     lift = new Lift();
     arm = new Arm();
     wrist = new Wrist();
+
+    System.out.println("Robot has turned on");
   }
 
   @Override
@@ -74,6 +78,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+
+    System.out.println("Robot has started driver control!");
+
+    Scheduler.getInstance().run();
   }
 
   @Override

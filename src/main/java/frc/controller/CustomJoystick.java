@@ -9,6 +9,8 @@ package frc.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+import frc.robot.RobotMap;
+
 /**
  * Add your docs here.
  */
@@ -20,15 +22,27 @@ public class CustomJoystick extends Joystick {
         super(port);
     }
 
-    public double getScaledX() {
-        double val = getX();
-        double throttle = getThrottle();
-        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
+    private double applyThreshold(double val) {
+        return Math.abs(val) < threshold ? 0.0 : val;
     }
 
-    public double getScaledY() {
-        double val = getY();
-        double throttle = getThrottle();
-        return Math.abs(val) < threshold ? 0.0 : val * (1.0 - throttle) * -0.5;
+    public double rightStickX() {
+        this.getRawAxis(0);
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_X_AXIS));
     }
+
+    public double rightStickY() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_Y_AXIS));
+    }
+
+    public double leftStickX() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_X_AXIS));
+    }
+
+    public double leftStickY() {
+        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_Y_AXIS));
+    }
+
+    // continue adding more methods for each necessary button
+    // add by returning this.getButton(RobotMap.Joystick.{port number})
 }

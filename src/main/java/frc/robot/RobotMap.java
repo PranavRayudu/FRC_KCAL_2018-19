@@ -49,7 +49,6 @@ public class RobotMap {
   public class Pneumatics {
     public static final int COMPRESSOR_PORT = 0;
     public static final int PUSHER_SOLENOID_PORT = 1;
-    public static final int VERTICAL_SOLENOID_PORT = 2;
     public static final int HORIZONTAL_SOLENOID_PORT = 3;
   }
 }

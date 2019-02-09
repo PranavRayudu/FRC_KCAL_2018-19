@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class LiftControl extends Command {
   public LiftControl() {
@@ -26,10 +25,17 @@ public class LiftControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_LB);
-    boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_RB);
+    // boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_LB);
+    // boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_RB);
 
-    double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
+    // double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
+
+    double pwr = 0.0;
+
+    if(OI.joystick.leftTriggerPressed())
+      pwr += 1.0;
+    if(OI.joystick.lb.get())
+      pwr -= 1.0;
 
     Robot.lift.setPwr(pwr);
   }

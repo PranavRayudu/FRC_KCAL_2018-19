@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 
 public class ArmControl extends Command {
@@ -28,10 +27,17 @@ public class ArmControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
-    boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_Y);
+    // boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
+    // boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_Y);
 
-    double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
+    // double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
+
+    double pwr = 0.0;
+
+    if(OI.joystick.rightTriggerPressed())
+      pwr += 1.0;
+    if(OI.joystick.rb.get())
+      pwr -= 1.0;
 
     Robot.arm.setPwr(pwr);
   }

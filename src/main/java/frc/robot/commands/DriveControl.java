@@ -26,10 +26,13 @@ public class DriveControl extends Command {
   @Override
   protected void execute() {
     
-    double rightVal = OI.joystick.rightStickY();
-    double lefttVal = OI.joystick.leftStickY();
-    Robot.driveBase.setRaw(rightVal, lefttVal);
+    // double rightVal = OI.joystick.rightStickY();
+    // double lefttVal = OI.joystick.leftStickY();
+    // Robot.driveBase.setRaw(rightVal, lefttVal);
     
+    double forwardVal = OI.joystick.leftStickY();
+    double rotVal = OI.joystick.leftStickX();
+    Robot.driveBase.setArcade(forwardVal, rotVal);
     System.out.println("robot driving with controller!");
   }
 

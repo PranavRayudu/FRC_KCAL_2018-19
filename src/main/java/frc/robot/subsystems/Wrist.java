@@ -21,12 +21,8 @@ import frc.robot.commands.Wrist.IntakeControl;
 public class Wrist extends Subsystem {
   
   private Compressor compressor;
-  private Solenoid vertical;
-  private Solenoid horizontal;
   private Solenoid pusher;
 
-  private boolean verticalState;
-  private boolean horizontalState;
   private boolean pusherState;
 
   private Talon leftIntake;
@@ -34,8 +30,6 @@ public class Wrist extends Subsystem {
 
   public Wrist() {
     compressor = new Compressor(RobotMap.Pneumatics.COMPRESSOR_PORT);
-    vertical = new Solenoid(RobotMap.Pneumatics.VERTICAL_SOLENOID_PORT);
-    vertical = new Solenoid(RobotMap.Pneumatics.HORIZONTAL_SOLENOID_PORT);
     pusher = new Solenoid(RobotMap.Pneumatics.PUSHER_SOLENOID_PORT);
 
     leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
@@ -66,30 +60,6 @@ public class Wrist extends Subsystem {
   public void setPusherSol(boolean state) {
     pusher.set(state);
     pusherState = state;
-  }
-
-  // vertical solenoid controls
-
-  public void toogleVerticalSol() {
-    verticalState = !verticalState;
-    vertical.set(!verticalState);
-  }
-
-  public void setVerticalSol(boolean state) {
-    vertical.set(state);
-    verticalState = state;
-  }
-
-  // horizontal solenoid controls
-
-  public void toggleHorizontalSol() {
-    horizontalState = !horizontalState;
-    horizontal.set(horizontalState);
-  }
-
-  public void setHorizontalSol(boolean state) {
-    horizontal.set(state);
-    horizontalState = state;
   }
 
   @Override

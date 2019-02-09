@@ -27,7 +27,7 @@ public class IntakeControl extends Command {
   @Override
   protected void execute() {
     boolean forward = OI.joystick.getRawButton(RobotMap.Joystick.BTN_A);
-    boolean backward = OI.joystick.getRawButton(RobotMap.Joystick.BTN_B);
+    boolean backward = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
 
     double pwr = (forward ? 1.0 : 0.0) - (backward ? 1.0 : 0.0);
 

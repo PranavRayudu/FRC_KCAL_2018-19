@@ -66,4 +66,7 @@ public class CustomJoystick extends Joystick {
     public boolean rightTriggerPressed() {
         return this.getRawAxis(RobotMap.Joystick.TRIGGER) == 1;
     }
+
+    // continue adding more methods for each necessary button
+    // add by returning this.getButton(RobotMap.Joystick.{port number})
 }

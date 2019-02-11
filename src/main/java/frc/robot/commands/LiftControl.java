@@ -32,8 +32,7 @@ public class LiftControl extends Command {
 
     double pwr = 0.0;
 
-    if(OI.joystick.leftTriggerPressed())
-      pwr += 1.0;
+    pwr += OI.joystick.leftTrigger();
     if(OI.joystick.lb.get())
       pwr -= 1.0;
 
@@ -49,11 +48,13 @@ public class LiftControl extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.lift.setPwr(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -45,11 +45,13 @@ public class DriveControl extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveBase.setRaw(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

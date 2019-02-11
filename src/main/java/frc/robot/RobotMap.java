@@ -11,20 +11,21 @@ public class RobotMap {
   
   // controller ports
   public class Joystick {
-    // please check that these controller ports are actually right through the dashboard
-    public static final int PORT = 0;
 
-    public static final int LEFT_X_AXIS = 1; 
-    public static final int LEFT_Y_AXIS = 2;
+    public static final int LEFT_X_AXIS = 0;
+    public static final int LEFT_Y_AXIS = 1;
 
-    public static final int TRIGGER = 3;
-    
     public static final int RIGHT_X_AXIS = 4;
     public static final int RIGHT_Y_AXIS = 5;
     
+    public static final int LEFT_TRIGGER = 2;
+    public static final int RIGHT_TRIGGER = 3;
+
+    public static final int DPAD_PORT = 0;
+    
     public static final int BTN_A = 1;
     public static final int BTN_B = 2;
-    public static final int BTN_X = 3;;
+    public static final int BTN_X = 3;
     public static final int BTN_Y = 4;
     public static final int BTN_LB = 5;
     public static final int BTN_RB = 6;
@@ -47,8 +48,9 @@ public class RobotMap {
   }
 
   public class Pneumatics {
-    public static final int COMPRESSOR_PORT = 0;
     public static final int PUSHER_SOLENOID_PORT = 1;
-    public static final int HORIZONTAL_SOLENOID_PORT = 3;
+    
+    public static final int LIFT_SOLENOID_PORT1 = 2;
+    public static final int LIFT_SOLENOID_PORT2 = 3;
   }
 }

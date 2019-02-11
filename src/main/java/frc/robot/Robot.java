@@ -11,7 +11,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.commands.DriveBase.DriveLiftToggle;
 import frc.robot.commands.Wrist.TogglePusher;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveBase;
@@ -81,11 +81,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // although all of these commands are part of the same subsystem, they are instantaneous methods, so they should happen instantly
-    wrist.setCompressor(true);;
-    oi.joystick.b.whenPressed(new TogglePusher());
-    //oi.joystick.y.whenPressed(new ToggleWristHorizontal());
-    //oi.joystick.start.whenPressed(new ToggleWristVertical());
+    oi.joystick.a.whenPressed(new TogglePusher());
+    oi.joystick.x.whenPressed(new DriveLiftToggle());
   }
 
   @Override

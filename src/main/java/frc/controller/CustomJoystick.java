@@ -17,7 +17,8 @@ import frc.robot.RobotMap;
  */
 public class CustomJoystick extends Joystick {
 
-    private static final double threshold = 0.05;
+    private static final double joystickThreshold = 0.05;
+    private static final double triggerThreshold = 0.5;
 
     public JoystickButton a, b, x, y;
     public JoystickButton lb, rb;
@@ -39,7 +40,7 @@ public class CustomJoystick extends Joystick {
     }
 
     private double applyThreshold(double val) {
-        return Math.abs(val) < threshold ? 0.0 : val;
+        return Math.abs(val) < joystickThreshold ? 0.0 : val;
     }
 
     public double rightStickX() {
@@ -60,13 +61,38 @@ public class CustomJoystick extends Joystick {
     }
 
     public boolean leftTriggerPressed() {
-        return this.getRawAxis(RobotMap.Joystick.TRIGGER) == -1;
+        return this.getRawAxis(RobotMap.Joystick.LEFT_TRIGGER) > triggerThreshold;
     }
 
     public boolean rightTriggerPressed() {
-        return this.getRawAxis(RobotMap.Joystick.TRIGGER) == 1;
+        return this.getRawAxis(RobotMap.Joystick.RIGHT_TRIGGER) > triggerThreshold;
     }
 
-    // continue adding more methods for each necessary button
-    // add by returning this.getButton(RobotMap.Joystick.{port number})
+    public double leftTrigger() {
+        return this.getRawAxis(RobotMap.Joystick.LEFT_TRIGGER);
+    }
+
+    public double rightTrigger() {
+        return this.getRawAxis(RobotMap.Joystick.RIGHT_TRIGGER);
+    }
+
+    public boolean dPadUp() {
+        return pov() == 315 || pov() == 0 || pov() == 45;
+    }
+
+    public boolean dPadDown() {
+        return pov() == 135 || pov() == 180 || pov() == 225;
+    }
+
+    public boolean dPadLeft() {
+        return pov() == 225 || pov() == 270 || pov() == 315;
+    }
+
+    public boolean dPadRight() {
+        return pov() == 45 || pov() == 90 || pov() == 135;
+    }
+
+    private int pov() {
+        return this.getPOV();
+    }
 }

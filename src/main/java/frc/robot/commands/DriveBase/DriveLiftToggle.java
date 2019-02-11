@@ -5,18 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.OI;
 import frc.robot.Robot;
 
+public class DriveLiftToggle extends Command {
 
-public class ArmControl extends Command {
-  
-  public ArmControl() {
-    requires(Robot.arm);
+  public DriveLiftToggle() {
+    requires(Robot.driveBase);
   }
 
   // Called just before this Command runs the first time
@@ -27,24 +25,13 @@ public class ArmControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
-    // boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_Y);
-
-    // double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
-
-    double pwr = 0.0;
-
-    pwr += OI.joystick.rightTrigger();
-    if(OI.joystick.rb.get())
-      pwr -= 1.0;
-
-    Robot.arm.setPwr(pwr);
+    Robot.driveBase.toggleBaseLift();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,7 +19,6 @@ import frc.robot.commands.Wrist.IntakeControl;
  */
 public class Wrist extends Subsystem {
   
-  private Compressor compressor;
   private Solenoid pusher;
 
   private boolean pusherState;
@@ -29,7 +27,6 @@ public class Wrist extends Subsystem {
   private Talon rightIntake;
 
   public Wrist() {
-    compressor = new Compressor(RobotMap.Pneumatics.COMPRESSOR_PORT);
     pusher = new Solenoid(RobotMap.Pneumatics.PUSHER_SOLENOID_PORT);
 
     leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
@@ -41,13 +38,6 @@ public class Wrist extends Subsystem {
   public void setIntakePwr(double val) {
     leftIntake.set(val);
     rightIntake.set(-val);
-  }
-  
-  // compressor controls
-
-  public void setCompressor(boolean state) {
-    if(state) compressor.start();
-    else compressor.stop();
   }
 
   // horizontal solenoid controls

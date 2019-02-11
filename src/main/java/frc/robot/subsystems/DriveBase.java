@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -20,8 +20,8 @@ import frc.robot.commands.DriveBase.DriveControl;
  */
 public class DriveBase extends Subsystem {
 
-  private PWMVictorSPX leftPWM;
-  private PWMVictorSPX rightSPX;
+  private Talon leftPWM;
+  private Talon rightSPX;
   private DifferentialDrive drive;
 
   private Solenoid driveLift1;
@@ -31,8 +31,8 @@ public class DriveBase extends Subsystem {
 
   public DriveBase() {
     
-    leftPWM = new PWMVictorSPX(RobotMap.Motors.LEFT_MOTOR_PWM);
-    rightSPX = new PWMVictorSPX(RobotMap.Motors.RIGHT_MOTOR_PWM);
+    leftPWM = new Talon(RobotMap.Motors.LEFT_MOTOR_PWM);
+    rightSPX = new Talon(RobotMap.Motors.RIGHT_MOTOR_PWM);
 
     drive = new DifferentialDrive(leftPWM, rightSPX);
 

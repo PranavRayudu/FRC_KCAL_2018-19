@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Wrist;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import frc.robot.OI;
 import frc.robot.Robot;
 
-public class SetPusher extends Command {
-
-  private boolean state;
-
-  public SetPusher(boolean state) {
-    requires(Robot.wrist);
-    this.state = state;
+public class DriveControl extends Command {
+  public DriveControl() {
+    requires(Robot.drive);
   }
 
   // Called just before this Command runs the first time
@@ -28,18 +25,30 @@ public class SetPusher extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.setPusherSol(state);
+    
+    // Double Joystick control
+    // double rightVal = OI.joystick.rightStickY();
+    // double lefttVal = OI.joystick.leftStickY();
+    // Robot.driveBase.setRaw(rightVal, lefttVal);
+    
+    // Single Joystick control
+    double forwardVal = OI.joystick.leftStickY();
+    double rotVal = OI.joystick.leftStickX();
+    Robot.drive.setArcade(forwardVal, rotVal);
+    
+    System.out.println("robot driving with controller!");
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drive.setRaw(0, 0);
   }
 
   // Called when another command which requires one or more of the same

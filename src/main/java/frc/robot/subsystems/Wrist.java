@@ -19,15 +19,21 @@ import frc.robot.commands.Wrist.IntakeControl;
  */
 public class Wrist extends Subsystem {
   
-  private Solenoid pusher;
+  private Solenoid hatchLifter1;
+  private Solenoid hatchLifter2;
 
-  private boolean pusherState;
+  private Solenoid gripper1;
+  private Solenoid gripper2;
+
+  private boolean hatchState;
+  private boolean gripperState;
 
   private Talon leftIntake;
   private Talon rightIntake;
 
   public Wrist() {
-    pusher = new Solenoid(RobotMap.Pneumatics.PUSHER_SOLENOID_PORT);
+    hatchLifter1 = new Solenoid(RobotMap.Pneumatics.HATCH_LIFTER_PORT1);
+    hatchLifter2 = new Solenoid(RobotMap.Pneumatics.HATCH_LIFTER_PORT2);
 
     leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
     rightIntake = new Talon(RobotMap.Motors.RIGHT_INTAKE_PWM);
@@ -40,16 +46,28 @@ public class Wrist extends Subsystem {
     rightIntake.set(-val);
   }
 
-  // horizontal solenoid controls
+  // horizontal controls
 
-  public void tooglePusherSol() {
-    pusherState = !pusherState;
-    pusher.set(!pusherState);
+  private void setGripperSol(boolean state) {
+    gripper1.set(state);
+    gripper2.set(state);
+    gripperState = state;
+  }
+  
+  public void toggleGripperSol() {
+    setGripperSol(!gripperState);
   }
 
-  public void setPusherSol(boolean state) {
-    pusher.set(state);
-    pusherState = state;
+  // pusher and vertical solenoid controls
+
+  private void setHatchSol(boolean state) {
+    hatchLifter1.set(state);
+    hatchLifter2.set(state);
+    hatchState = state;
+  }
+  
+  public void toggleHatchSol() {
+    setHatchSol(!hatchState);
   }
 
   @Override

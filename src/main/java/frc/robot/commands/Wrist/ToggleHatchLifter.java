@@ -5,20 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.DriveBase;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
-public class SetDriveLift extends Command {
-
-  private boolean state;
-
-  public SetDriveLift(boolean state) {
-    requires(Robot.driveBase);
-
-    this.state = state;
+public class ToggleHatchLifter extends Command {
+  public ToggleHatchLifter() {
+    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
@@ -29,7 +24,7 @@ public class SetDriveLift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveBase.setBaseLift(state);
+    Robot.wrist.toggleHatchSol();
   }
 
   // Make this return true when this Command no longer needs to run execute()

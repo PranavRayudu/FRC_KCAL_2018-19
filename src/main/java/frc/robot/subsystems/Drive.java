@@ -13,31 +13,31 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveBase.DriveControl;
+import frc.robot.commands.Drive.DriveControl;
 
 /**
  * Add your docs here.
  */
-public class DriveBase extends Subsystem {
+public class Drive extends Subsystem {
 
   private Talon leftPWM;
   private Talon rightSPX;
   private DifferentialDrive drive;
 
-  private Solenoid driveLift1;
-  private Solenoid driveLift2;
+  private Solenoid driveJack1;
+  private Solenoid driveJack2;
 
-  private boolean driveLiftState;
+  private boolean driveJackState;
 
-  public DriveBase() {
+  public Drive() {
     
     leftPWM = new Talon(RobotMap.Motors.LEFT_MOTOR_PWM);
     rightSPX = new Talon(RobotMap.Motors.RIGHT_MOTOR_PWM);
 
     drive = new DifferentialDrive(leftPWM, rightSPX);
 
-    driveLift1 = new Solenoid(RobotMap.Pneumatics.LIFT_SOLENOID_PORT1);
-    driveLift2 = new Solenoid(RobotMap.Pneumatics.LIFT_SOLENOID_PORT2);
+    driveJack1 = new Solenoid(RobotMap.Pneumatics.JACK_PORT1);
+    driveJack2 = new Solenoid(RobotMap.Pneumatics.JACK_PORT2);
   }
 
   public void setRaw(double leftVal, double rightVal) {
@@ -48,16 +48,14 @@ public class DriveBase extends Subsystem {
     drive.arcadeDrive(xSpeed, zRotation);
   }
 
-  public void setBaseLift(boolean state) {
-    driveLift1.set(state);
-    driveLift2.set(state);
-    driveLiftState = state;
+  private void setJack(boolean state) {
+    driveJack1.set(state);
+    driveJack2.set(state);
+    driveJackState = state;
   }
 
-  public void toggleBaseLift() {
-    driveLiftState = !driveLiftState;
-    driveLift1.set(driveLiftState);
-    driveLift2.set(driveLiftState);
+  public void toggleJack() {
+    setJack(!driveJackState);
   }
 
   @Override

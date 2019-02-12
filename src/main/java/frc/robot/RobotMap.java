@@ -9,7 +9,15 @@ package frc.robot;
 
 public class RobotMap {
   
-  // controller ports
+  public class Sensors {
+
+    public static final int CAMERA_ONE = 0;
+    public static final int CAMERA_TWO = 1;
+
+    public static final int LIFT_SWTICH_UP = 0;
+    public static final int LIFT_SWTICH_DOWN = 1;
+  }
+
   public class Joystick {
 
     public static final int LEFT_X_AXIS = 0;
@@ -21,7 +29,7 @@ public class RobotMap {
     public static final int LEFT_TRIGGER = 2;
     public static final int RIGHT_TRIGGER = 3;
 
-    public static final int DPAD_PORT = 0;
+    public static final int DPAD = 0;
     
     public static final int BTN_A = 1;
     public static final int BTN_B = 2;
@@ -36,21 +44,27 @@ public class RobotMap {
   }
 
   public class Motors {
-    public static final int LEFT_MOTOR_PWM = 0;
-    public static final int RIGHT_MOTOR_PWM = 1;
-
-    public static final int ARM_MOTOR_PWM = 10;
-
-    public static final int LIFT_MOTOR_PWM = 11;
+    public static final int LEFT_MOTOR_PWM = 1;
+    public static final int RIGHT_MOTOR_PWM = 0;
 
     public static final int LEFT_INTAKE_PWM = 2;
     public static final int RIGHT_INTAKE_PWM = 3;
+        
+    // CAN wired, so ports refer to Device ID
+    // configure in Phoenix Tuner
+    public static final int ARM_MOTOR_PWM = 2;
+    public static final int LIFT_MOTOR_PWM = 3;
   }
 
   public class Pneumatics {
-    public static final int PUSHER_SOLENOID_PORT = 1;
-    
-    public static final int LIFT_SOLENOID_PORT1 = 2;
-    public static final int LIFT_SOLENOID_PORT2 = 3;
+
+    public static final int HATCH_LIFTER_PORT1 = 0;
+    public static final int HATCH_LIFTER_PORT2 = 1;
+
+    public static final int GIRPPER_PORT1 = 2;
+    public static final int GRIPPER_PORT2 = 3;
+
+    public static final int JACK_PORT1 = 4;
+    public static final int JACK_PORT2 = 5;
   }
 }

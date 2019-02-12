@@ -10,21 +10,38 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import frc.robot.RobotMap;
-import frc.robot.commands.LiftControl;
+import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
+
+  
+  DigitalInput topLimit;
+  DigitalInput bottomLimit;
 
   TalonSRX liftPWM;
 
   public Lift() {
+
+    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
+    bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
+
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
   }
 
   public void setPwr(double val) {
-    liftPWM.set(ControlMode.PercentOutput, val);
+
+    double in = 0.0;
+    
+    if(topLimit.get())
+      Math.min(0.0, val);
+    
+    if(bottomLimit.get())
+      in = Math.max(0.0, val);
+
+    liftPWM.set(ControlMode.PercentOutput, in);
   }
 
   @Override

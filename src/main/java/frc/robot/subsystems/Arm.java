@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.ArmControl;
+import frc.robot.commands.Arm.ArmControl;
 
 /**
  * Add your docs here.

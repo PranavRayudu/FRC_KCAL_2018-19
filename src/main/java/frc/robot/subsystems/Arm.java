@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -37,11 +35,10 @@ public class Arm extends Subsystem {
     // armPWM.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
     // armPWM.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 
-    // TODO: remove any and all constants from program 
     // how many seconds to get to full speed
-    armPWM.configClosedloopRamp(0.5, 0); 
+    //armPWM.configClosedloopRamp(0.5, 0); 
 
-    // TODO: set all this PID controls
+    // TODO: set all these PID controls
     // Feast your eyes on 
     // https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/PositionClosedLoop/src/main/java/frc/robot/Robot.java
     // 
@@ -50,17 +47,16 @@ public class Arm extends Subsystem {
 // 		_talon.config_kP(Constants.kPIDLoopIdx, Constants.kGains.kP, Constants.kTimeoutMs);
 // 		_talon.config_kI(Constants.kPIDLoopIdx, Constants.kGains.kI, Constants.kTimeoutMs);
 //    _talon.config_kD(Constants.kPIDLoopIdx, Constants.kGains.kD, Constants.kTimeoutMs);
-    //armPWM.configSelectedFeedbackSensor(FeedbackDevice.PulseWidthEncodedPosition);
-    //armPWM.config_kP(slotIdx, value)
+    armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void setPwr(double val) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
     
     if(val != 0.0) {
-      armPWM.set(ControlMode.PercentOutput, val);
+      armPWM.set(ControlMode.PercentOutput, val * 0.5);
     } else { // configure PID controls before this
-      armPWM.set(ControlMode.Position, armPWM.getSelectedSensorPosition());
+      //armPWM.set(ControlMode.Position, armPWM.getSelectedSensorPosition());
     }
   }
 

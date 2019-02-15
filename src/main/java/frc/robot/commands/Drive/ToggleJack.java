@@ -8,7 +8,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.OI;
 import frc.robot.Robot;
 
 public class ToggleJack extends Command {
@@ -25,7 +25,8 @@ public class ToggleJack extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drive.toggleJack();
+    if(OI.joystick.start.get()) // TODO: make sure jack toggles only when both buttons are pressed
+      Robot.drive.toggleJack();
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -13,13 +13,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleJack;
-import frc.robot.commands.Lift.CalibrateLift;
+import frc.robot.commands.Wrist.IntakeControl;
 import frc.robot.commands.Wrist.ToggleGripper;
 import frc.robot.commands.Wrist.ToggleHatchLifter;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Wrist;
+import frc.robot.subsystems.Wrist.IntakeState;
 
 public class Robot extends TimedRobot {
 
@@ -31,8 +32,6 @@ public class Robot extends TimedRobot {
   public static Wrist wrist;
 
   private Compressor compressor;
-
-  ToggleGripper togGrip;  
 
   @Override
   public void robotInit() {
@@ -49,7 +48,6 @@ public class Robot extends TimedRobot {
       System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
     }
 
-
     oi = new OI();
 
     drive = new Drive();
@@ -57,18 +55,34 @@ public class Robot extends TimedRobot {
     arm = new Arm();
     wrist = new Wrist();
 
-    SmartDashboard.putData(drive);
-    SmartDashboard.putData(lift);
-    SmartDashboard.putData(arm);
-    SmartDashboard.putData(wrist);
+    // SmartDashboard.putData(drive);
+    // SmartDashboard.putData(lift);
+    // SmartDashboard.putData(arm);
+    // SmartDashboard.putData(wrist);
 
     compressor = new Compressor();
-    
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
 
-    togGrip = new ToggleGripper();
-
     System.out.println("Robot has turned on");
+  }
+
+  private void commonInit() {
+    oi.joystick.y.whenPressed(new ToggleHatchLifter());
+    oi.joystick.b.whenPressed(new ToggleJack());
+
+    oi.joystick.a.whenPressed(new IntakeControl(IntakeState.IN));
+    oi.joystick.x.whenPressed(new IntakeControl(IntakeState.OUT));
+  }
+
+  private void commonLoop() {
+    Scheduler.getInstance().run();
+
+    if(OI.joystick.dPadDown()) {
+      ToggleGripper togGrip = new ToggleGripper();
+      togGrip.start(); // TODO: check if gripper actually toggles
+    }
+
+    wrist.intakeLoop();
   }
 
   @Override
@@ -85,33 +99,22 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    commonInit();
   }
 
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    commonLoop();
   }
 
   @Override
   public void teleopInit() {
-
-    oi.joystick.y.whenPressed(new ToggleHatchLifter());
-    oi.joystick.b.whenPressed(new ToggleJack());
-
-    // TODO: uncomment this once limit switches are plugged in
-    // CalibrateLift calibrate = new CalibrateLift();
-    // calibrate.start();
+    commonInit();
   }
 
   @Override
   public void teleopPeriodic() {
-
-    System.out.println("Robot has started driver control!");
-
-    Scheduler.getInstance().run();
-    
-    if(OI.joystick.dPadDown())
-      togGrip.start();
+    commonLoop();
   }
 
   @Override

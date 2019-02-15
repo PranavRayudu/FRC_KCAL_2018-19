@@ -8,12 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
 import frc.robot.RobotMap;
 import frc.robot.commands.Drive.DriveControl;
 
@@ -46,13 +44,13 @@ public class Drive extends Subsystem {
   public void setRaw(double leftVal, double rightVal) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
     
-    //drive.tankDrive(leftVal, rightVal);
+    drive.tankDrive(leftVal, rightVal);
   }
 
   public void setArcade(double xSpeed, double zRotation) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
 
-    //drive.arcadeDrive(xSpeed, zRotation);
+    drive.arcadeDrive(xSpeed, zRotation);
   }
 
   private void setJack(boolean state) {

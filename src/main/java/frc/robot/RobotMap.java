@@ -8,9 +8,10 @@
 package frc.robot;
 
 public class RobotMap {
-  
-  // TODO: make this worth something
-  public static final double[] liftCheckpoints = {10.0, 20.0, 30.0};
+
+  public class Constants {
+    public static final double INTAKE_PWR = 0.25;
+  }
 
   public class Config {
     public static final boolean ENABLE_PNEUMATICS = true; 
@@ -22,8 +23,8 @@ public class RobotMap {
     public static final int CAMERA_ONE = 0;
     public static final int CAMERA_TWO = 1;
 
-    public static final int LIFT_SWTICH_UP = 0;
-    public static final int LIFT_SWTICH_DOWN = 1;
+    public static final int LIFT_SWTICH_DOWN = 0;
+    public static final int LIFT_SWTICH_UP = 1;
   }
 
   public class Joystick {
@@ -59,19 +60,18 @@ public class RobotMap {
     public static final int RIGHT_INTAKE_PWM = 3;
         
     // CAN wired, so ports refer to Device ID
-    // configure in Phoenix Tuner
-    public static final int ARM_MOTOR_PWM = 2;
-    public static final int LIFT_MOTOR_PWM = 3;
+    public static final int ARM_MOTOR_PWM = 3;
+    public static final int LIFT_MOTOR_PWM = 2;
   }
 
   public class Pneumatics {
-    public static final int HATCH_LIFTER_FORWARD = 0;
-    public static final int HATCH_LIFTER_REVERSE = 1;
+    public static final int HATCH_LIFTER_FORWARD = 4;
+    public static final int HATCH_LIFTER_REVERSE = 5;
 
     public static final int GIRPPER_FORWARD = 2;
     public static final int GRIPPER_REVERSE = 3;
 
-    public static final int JACK_FORWARD = 4;
-    public static final int JACK_REVERSE = 5;
+    public static final int JACK_FORWARD = 0;
+    public static final int JACK_REVERSE = 1;
   }
 }

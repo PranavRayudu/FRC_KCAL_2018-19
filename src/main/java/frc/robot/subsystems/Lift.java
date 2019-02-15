@@ -17,7 +17,6 @@ import frc.robot.RobotMap;
 import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
-
   
   DigitalInput topLimit;
   DigitalInput bottomLimit;
@@ -26,33 +25,28 @@ public class Lift extends Subsystem {
 
   public Lift() {
 
-    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
+    //topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
     
     liftPWM.setNeutralMode(NeutralMode.Brake);
     liftPWM.neutralOutput();
-    liftPWM.setSensorPhase(false); // is your sensor going pos or neg
-
-    // NOTE: only if limit switches are plugged-in 
-    // put limit switch into talon port using standard stuff
-    //liftPWM.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    //liftPWM.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    
-    //liftPWM.configClearPositionOnLimitR(true, 0);
+    //liftPWM.setSensorPhase(false); // is your sensor going pos or neg
+    //liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void setPwr(double val) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
 
-    double in = 0.0;
+    double in = val;
+
+    //TODO: elevator limits need to work
+    // if(topLimit.get())
+    //   Math.max(0.0, val);
     
-    if(topLimit.get())
-      Math.min(0.0, val);
-    
-    if(bottomedOut())
-      in = Math.max(0.0, val);
+    // if(bottomLimit.get())
+    //    in = Math.min(0.0, val);
 
     liftPWM.set(ControlMode.PercentOutput, in);
   }

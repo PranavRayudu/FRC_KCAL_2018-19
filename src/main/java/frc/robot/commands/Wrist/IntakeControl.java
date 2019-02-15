@@ -8,42 +8,43 @@
 package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
+import frc.robot.subsystems.Wrist.IntakeState;
 
 public class IntakeControl extends Command {
-  public IntakeControl() {
+
+  IntakeState state;
+
+  public IntakeControl(IntakeState state) {
     requires(Robot.wrist);
+    this.state = state;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    boolean forward = OI.joystick.getRawButton(RobotMap.Joystick.BTN_A);
-    boolean backward = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
-
-    double pwr = (forward ? 1.0 : 0.0) - (backward ? 1.0 : 0.0);
-
-    Robot.wrist.setIntakePwr(pwr);
+    if(Robot.wrist.intakeState == state)
+      Robot.wrist.intakeState = IntakeState.STOP;  
+    else
+      Robot.wrist.intakeState = state;
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.wrist.setIntakePwr(0.0);
+    
   }
 
   // Called when another command which requires one or more of the same

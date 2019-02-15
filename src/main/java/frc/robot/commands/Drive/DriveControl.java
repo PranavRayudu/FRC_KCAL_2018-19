@@ -32,7 +32,7 @@ public class DriveControl extends Command {
     // Robot.driveBase.setRaw(rightVal, lefttVal);
     
     // Single Joystick control
-    double forwardVal = OI.joystick.leftStickY();
+    double forwardVal = -OI.joystick.leftStickY();
     double rotVal = OI.joystick.leftStickX();
     Robot.drive.setArcade(forwardVal, rotVal);
   }

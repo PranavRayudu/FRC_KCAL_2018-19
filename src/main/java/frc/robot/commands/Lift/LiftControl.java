@@ -26,10 +26,6 @@ public class LiftControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_LB);
-    // boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_RB);
-
-    // double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
 
     double pwr = 0.0;
 

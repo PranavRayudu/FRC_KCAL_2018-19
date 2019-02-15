@@ -25,7 +25,7 @@ public class Lift extends Subsystem {
 
   public Lift() {
 
-    //topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
+    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
@@ -41,12 +41,11 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    //TODO: elevator limits need to work
-    // if(topLimit.get())
-    //   Math.max(0.0, val);
+    if(topLimit.get())
+      in = Math.min(0, in);
     
-    // if(bottomLimit.get())
-    //    in = Math.min(0.0, val);
+    else if(bottomLimit.get())
+      in = Math.max(0, in);
 
     liftPWM.set(ControlMode.PercentOutput, in);
   }

@@ -36,17 +36,17 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     
-    try {
-      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
-    } catch (Exception e) {
-      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
-    }
+    // try {
+    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
+    // } catch (Exception e) {
+    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
+    // }
 
-    try {
-      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
-    } catch (Exception e) {
-      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
-    }
+    // try {
+    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
+    // } catch (Exception e) {
+    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
+    // }
 
     oi = new OI();
 
@@ -70,8 +70,8 @@ public class Robot extends TimedRobot {
     oi.joystick.y.whenPressed(new ToggleHatchLifter());
     oi.joystick.b.whenPressed(new ToggleJack());
 
-    oi.joystick.a.whenPressed(new IntakeControl(IntakeState.IN));
-    oi.joystick.x.whenPressed(new IntakeControl(IntakeState.OUT));
+    oi.joystick.lefJoystickButton.whenPressed(new IntakeControl(IntakeState.IN));
+    oi.joystick.righJoystickButton.whenPressed(new IntakeControl(IntakeState.OUT));
   }
 
   private void commonLoop() {

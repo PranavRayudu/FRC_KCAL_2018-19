@@ -26,8 +26,8 @@ public class Arm extends Subsystem {
   public Arm() {
     armPWM = new TalonSRX(RobotMap.Motors.ARM_MOTOR_PWM);
 
-    armPWM.setNeutralMode(NeutralMode.Brake);
-    armPWM.neutralOutput();
+    //armPWM.setNeutralMode(NeutralMode.Coast);
+    //armPWM.neutralOutput();
     armPWM.setSensorPhase(false); // is your sensor going pos or neg
     
     // uncomment only if limit switches are added to arm
@@ -47,17 +47,16 @@ public class Arm extends Subsystem {
 // 		_talon.config_kP(Constants.kPIDLoopIdx, Constants.kGains.kP, Constants.kTimeoutMs);
 // 		_talon.config_kI(Constants.kPIDLoopIdx, Constants.kGains.kI, Constants.kTimeoutMs);
 //    _talon.config_kD(Constants.kPIDLoopIdx, Constants.kGains.kD, Constants.kTimeoutMs);
-    armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    //armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void setPwr(double val) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
     
-    if(val != 0.0) {
-      armPWM.set(ControlMode.PercentOutput, val * 0.5);
-    } else { // configure PID controls before this
+    armPWM.set(ControlMode.PercentOutput, val * RobotMap.Constants.ARM_PWR);
+    //} else { // configure PID controls before this
       //armPWM.set(ControlMode.Position, armPWM.getSelectedSensorPosition());
-    }
+    //}
   }
 
   @Override

@@ -23,6 +23,7 @@ public class CustomJoystick extends Joystick {
     public JoystickButton a, b, x, y;
     public JoystickButton lb, rb;
     public JoystickButton start, back;
+    public JoystickButton lefJoystickButton, righJoystickButton;
 
     public CustomJoystick(final int port) {
         super(port);
@@ -37,6 +38,9 @@ public class CustomJoystick extends Joystick {
 
         start = new JoystickButton(this, RobotMap.Joystick.BTN_START);
         back  = new JoystickButton(this, RobotMap.Joystick.BTN_BACK);
+        
+        lefJoystickButton = new JoystickButton(this, RobotMap.Joystick.BTN_LEFT_JOYSTICK);
+        righJoystickButton = new JoystickButton(this, RobotMap.Joystick.BTN_RIGHT_JOYSTICK);
     }
 
     private double applyThreshold(double val) {

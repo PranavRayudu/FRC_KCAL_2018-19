@@ -27,9 +27,8 @@ public class LiftControl extends Command {
   @Override
   protected void execute() {
 
-    double pwr = 0.0;
-
-    pwr += OI.joystick.leftTrigger();
+    double pwr = OI.joystick.leftTrigger();
+    
     if(OI.joystick.lb.get())
       pwr -= 1.0;
 

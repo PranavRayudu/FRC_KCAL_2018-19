@@ -11,10 +11,14 @@ public class RobotMap {
 
   public class Constants {
     public static final double INTAKE_PWR = 0.25;
+    public static final double ARM_PWR = 0.5;
+
+    public static final double DRIVE_HIGH = 0.75;
+    public static final double DRIVE_LOW = 0.25;
   }
 
   public class Config {
-    public static final boolean ENABLE_PNEUMATICS = true; 
+    public static final boolean ENABLE_PNEUMATICS = false; 
     public static final boolean ENABLE_MOTORS = true;
   }
 

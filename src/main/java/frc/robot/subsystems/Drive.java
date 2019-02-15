@@ -50,7 +50,7 @@ public class Drive extends Subsystem {
   public void setArcade(double xSpeed, double zRotation) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
 
-    drive.arcadeDrive(xSpeed, zRotation);
+    //drive.arcadeDrive(xSpeed, zRotation);
   }
 
   private void setJack(boolean state) {

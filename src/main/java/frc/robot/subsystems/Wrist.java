@@ -72,8 +72,6 @@ public class Wrist extends Subsystem {
       case OUT:
         setIntakePwr(-RobotMap.Constants.INTAKE_PWR);
     }
-
-    System.out.print("halp me");
   }
 
   // horizontal controls

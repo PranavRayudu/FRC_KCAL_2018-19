@@ -30,8 +30,8 @@ public class Lift extends Subsystem {
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
     
-    liftPWM.setNeutralMode(NeutralMode.Brake);
-    liftPWM.neutralOutput();
+    //liftPWM.setNeutralMode(NeutralMode.Brake);
+    //liftPWM.neutralOutput();
     //liftPWM.setSensorPhase(false); // is your sensor going pos or neg
     //liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
@@ -41,11 +41,14 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    if(topLimit.get())
-      in = Math.min(0, in);
-    
-    else if(bottomLimit.get())
-      in = Math.max(0, in);
+    // if(topLimit.get()) {
+    //   in = Math.min(in, 0);
+    //   System.out.println("limiting top!!!!!!!!!!!!!!!!!!!!!!!");
+    // }
+
+    if(bottomLimit.get()) {
+      in = Math.max(in, 0);
+    }
 
     liftPWM.set(ControlMode.PercentOutput, in);
   }

@@ -8,10 +8,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import frc.robot.RobotMap;
 import frc.robot.commands.Arm.ArmControl;
 
@@ -24,10 +27,41 @@ public class Arm extends Subsystem {
 
   public Arm() {
     armPWM = new TalonSRX(RobotMap.Motors.ARM_MOTOR_PWM);
+
+    armPWM.setNeutralMode(NeutralMode.Brake);
+    armPWM.neutralOutput();
+    armPWM.setSensorPhase(false); // is your sensor going pos or neg
+    
+    // uncomment only if limit switches are added to arm
+    // put limit switch into talon port using standard stuff
+    // armPWM.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+    // armPWM.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+
+    // TODO: remove any and all constants from program 
+    // how many seconds to get to full speed
+    armPWM.configClosedloopRamp(0.5, 0); 
+
+    // TODO: set all this PID controls
+    // Feast your eyes on 
+    // https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/PositionClosedLoop/src/main/java/frc/robot/Robot.java
+    // 
+		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */
+// 		_talon.config_kF(Constants.kPIDLoopIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+// 		_talon.config_kP(Constants.kPIDLoopIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+// 		_talon.config_kI(Constants.kPIDLoopIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+//    _talon.config_kD(Constants.kPIDLoopIdx, Constants.kGains.kD, Constants.kTimeoutMs);
+    //armPWM.configSelectedFeedbackSensor(FeedbackDevice.PulseWidthEncodedPosition);
+    //armPWM.config_kP(slotIdx, value)
   }
 
   public void setPwr(double val) {
-    armPWM.set(ControlMode.PercentOutput, val);
+    if(!RobotMap.Config.ENABLE_MOTORS) return;
+    
+    if(val != 0.0) {
+      armPWM.set(ControlMode.PercentOutput, val);
+    } else { // configure PID controls before this
+      armPWM.set(ControlMode.Position, armPWM.getSelectedSensorPosition());
+    }
   }
 
   @Override

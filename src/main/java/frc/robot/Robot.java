@@ -8,10 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleJack;
+import frc.robot.commands.Lift.CalibrateLift;
 import frc.robot.commands.Wrist.ToggleGripper;
 import frc.robot.commands.Wrist.ToggleHatchLifter;
 import frc.robot.subsystems.Arm;
@@ -27,6 +29,8 @@ public class Robot extends TimedRobot {
   public static Lift lift;
   public static Arm arm;
   public static Wrist wrist;
+
+  private Compressor compressor;
 
   ToggleGripper togGrip;  
 
@@ -57,6 +61,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(lift);
     SmartDashboard.putData(arm);
     SmartDashboard.putData(wrist);
+
+    compressor = new Compressor();
+    
+    compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
 
     togGrip = new ToggleGripper();
 
@@ -89,6 +97,10 @@ public class Robot extends TimedRobot {
 
     oi.joystick.y.whenPressed(new ToggleHatchLifter());
     oi.joystick.b.whenPressed(new ToggleJack());
+
+    // TODO: uncomment this once limit switches are plugged in
+    // CalibrateLift calibrate = new CalibrateLift();
+    // calibrate.start();
   }
 
   @Override

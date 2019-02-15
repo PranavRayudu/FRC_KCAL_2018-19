@@ -9,6 +9,14 @@ package frc.robot;
 
 public class RobotMap {
   
+  // TODO: make this worth something
+  public static final double[] liftCheckpoints = {10.0, 20.0, 30.0};
+
+  public class Config {
+    public static final boolean ENABLE_PNEUMATICS = true; 
+    public static final boolean ENABLE_MOTORS = true;
+  }
+
   public class Sensors {
 
     public static final int CAMERA_ONE = 0;
@@ -57,14 +65,13 @@ public class RobotMap {
   }
 
   public class Pneumatics {
+    public static final int HATCH_LIFTER_FORWARD = 0;
+    public static final int HATCH_LIFTER_REVERSE = 1;
 
-    public static final int HATCH_LIFTER_PORT1 = 0;
-    public static final int HATCH_LIFTER_PORT2 = 1;
+    public static final int GIRPPER_FORWARD = 2;
+    public static final int GRIPPER_REVERSE = 3;
 
-    public static final int GIRPPER_PORT1 = 2;
-    public static final int GRIPPER_PORT2 = 3;
-
-    public static final int JACK_PORT1 = 4;
-    public static final int JACK_PORT2 = 5;
+    public static final int JACK_FORWARD = 4;
+    public static final int JACK_REVERSE = 5;
   }
 }

@@ -5,16 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Drive;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import frc.robot.OI;
 import frc.robot.Robot;
 
-public class DriveControl extends Command {
-  public DriveControl() {
-    requires(Robot.drive);
+public class CalibrateLift extends Command {
+
+  private boolean bottomedOut;
+  public static double bottomOutPwr = 0.1;
+
+  public CalibrateLift() {
+    requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
@@ -25,28 +27,24 @@ public class DriveControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    // Double Joystick control
-    // double rightVal = OI.joystick.rightStickY();
-    // double lefttVal = OI.joystick.leftStickY();
-    // Robot.driveBase.setRaw(rightVal, lefttVal);
-    
-    // Single Joystick control
-    double forwardVal = OI.joystick.leftStickY();
-    double rotVal = OI.joystick.leftStickX();
-    Robot.drive.setArcade(forwardVal, rotVal);
+    bottomedOut = Robot.lift.bottomedOut();
+
+    if(!bottomedOut) {
+      Robot.lift.setPwr(-bottomOutPwr);
+    } else {
+      // TODO: zero-out encoder in TalonSRX for lift
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return bottomedOut;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drive.setRaw(0, 0);
   }
 
   // Called when another command which requires one or more of the same

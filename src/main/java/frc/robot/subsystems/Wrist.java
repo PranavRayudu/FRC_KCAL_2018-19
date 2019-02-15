@@ -7,8 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.RobotMap;
@@ -19,11 +21,8 @@ import frc.robot.commands.Wrist.IntakeControl;
  */
 public class Wrist extends Subsystem {
   
-  private Solenoid hatchLifter1;
-  private Solenoid hatchLifter2;
-
-  private Solenoid gripper1;
-  private Solenoid gripper2;
+  private DoubleSolenoid hatchLifter;
+  private DoubleSolenoid gripper;
 
   private boolean hatchState;
   private boolean gripperState;
@@ -32,9 +31,17 @@ public class Wrist extends Subsystem {
   private Talon rightIntake;
 
   public Wrist() {
-    hatchLifter1 = new Solenoid(RobotMap.Pneumatics.HATCH_LIFTER_PORT1);
-    hatchLifter2 = new Solenoid(RobotMap.Pneumatics.HATCH_LIFTER_PORT2);
+    
+    hatchLifter = new DoubleSolenoid(
+      RobotMap.Pneumatics.HATCH_LIFTER_FORWARD, 
+      RobotMap.Pneumatics.HATCH_LIFTER_REVERSE
+    );
 
+    gripper = new DoubleSolenoid(
+      RobotMap.Pneumatics.GIRPPER_FORWARD, 
+      RobotMap.Pneumatics.GRIPPER_REVERSE
+    );
+    
     leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
     rightIntake = new Talon(RobotMap.Motors.RIGHT_INTAKE_PWM);
   }
@@ -42,6 +49,8 @@ public class Wrist extends Subsystem {
   // intake controls
 
   public void setIntakePwr(double val) {
+    if(!RobotMap.Config.ENABLE_MOTORS) return;
+
     leftIntake.set(val);
     rightIntake.set(-val);
   }
@@ -49,8 +58,8 @@ public class Wrist extends Subsystem {
   // horizontal controls
 
   private void setGripperSol(boolean state) {
-    gripper1.set(state);
-    gripper2.set(state);
+    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+    gripper.set(val);
     gripperState = state;
   }
   
@@ -61,8 +70,8 @@ public class Wrist extends Subsystem {
   // pusher and vertical solenoid controls
 
   private void setHatchSol(boolean state) {
-    hatchLifter1.set(state);
-    hatchLifter2.set(state);
+    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+    hatchLifter.set(val);
     hatchState = state;
   }
   

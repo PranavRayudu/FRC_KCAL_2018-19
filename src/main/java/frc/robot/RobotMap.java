@@ -9,17 +9,17 @@ package frc.robot;
 
 public class RobotMap {
 
+  public class Config {
+    public static final boolean ENABLE_PNEUMATICS = false; 
+    public static final boolean ENABLE_MOTORS = true;
+  }
+
   public class Constants {
     public static final double INTAKE_PWR = 0.25;
     public static final double ARM_PWR = 0.5;
 
     public static final double DRIVE_HIGH = 0.75;
     public static final double DRIVE_LOW = 0.25;
-  }
-
-  public class Config {
-    public static final boolean ENABLE_PNEUMATICS = false; 
-    public static final boolean ENABLE_MOTORS = true;
   }
 
   public class Sensors {
@@ -31,6 +31,31 @@ public class RobotMap {
     public static final int LIFT_SWTICH_UP = 1;
   }
 
+  public class Motors {
+    public static final int LEFT_MOTOR_PWM = 1;
+    public static final int RIGHT_MOTOR_PWM = 0;
+
+    public static final int LEFT_INTAKE_PWM = 2;
+    public static final int RIGHT_INTAKE_PWM = 3;
+        
+    // CAN wired, so ports refer to Device ID
+    public static final int ARM_MOTOR_PWM = 3;
+    public static final int LIFT_MOTOR_PWM = 2;
+  }
+
+  public class Pneumatics {
+    public static final int HATCH_LIFTER_FORWARD = 4;
+    public static final int HATCH_LIFTER_REVERSE = 5;
+
+    public static final int GIRPPER_FORWARD = 2;
+    public static final int GRIPPER_REVERSE = 3;
+
+    public static final int FRONT_JACK_FORWARD = 6;
+    public static final int FRONT_JACK_REVERSE = 7;
+    public static final int BACK_JACK_FORWARD = 0;
+    public static final int BACK_JACK_REVERSE = 1;
+  }
+  
   public class Joystick {
 
     public static final int LEFT_X_AXIS = 0;
@@ -54,28 +79,5 @@ public class RobotMap {
     public static final int BTN_START = 8;
     public static final int BTN_LEFT_JOYSTICK = 9;
     public static final int BTN_RIGHT_JOYSTICK = 10;
-  }
-
-  public class Motors {
-    public static final int LEFT_MOTOR_PWM = 1;
-    public static final int RIGHT_MOTOR_PWM = 0;
-
-    public static final int LEFT_INTAKE_PWM = 2;
-    public static final int RIGHT_INTAKE_PWM = 3;
-        
-    // CAN wired, so ports refer to Device ID
-    public static final int ARM_MOTOR_PWM = 3;
-    public static final int LIFT_MOTOR_PWM = 2;
-  }
-
-  public class Pneumatics {
-    public static final int HATCH_LIFTER_FORWARD = 4;
-    public static final int HATCH_LIFTER_REVERSE = 5;
-
-    public static final int GIRPPER_FORWARD = 2;
-    public static final int GRIPPER_REVERSE = 3;
-
-    public static final int JACK_FORWARD = 0;
-    public static final int JACK_REVERSE = 1;
   }
 }

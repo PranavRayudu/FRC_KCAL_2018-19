@@ -12,7 +12,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.Lift.LiftControl;
 
@@ -41,13 +43,14 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    // if(topLimit.get()) {
-    //   in = Math.min(in, 0);
-    //   System.out.println("limiting top!!!!!!!!!!!!!!!!!!!!!!!");
-    // }
+    if(topLimit.get()) {
+      in = Math.min(in, 0);
+      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
+    }
 
     if(bottomLimit.get()) {
       in = Math.max(in, 0);
+      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
     }
 
     liftPWM.set(ControlMode.PercentOutput, in);

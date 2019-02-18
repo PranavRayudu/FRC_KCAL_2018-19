@@ -75,7 +75,9 @@ public class RobotMap {
     public static final int GIRPPER_FORWARD = 2;
     public static final int GRIPPER_REVERSE = 3;
 
-    public static final int JACK_FORWARD = 0;
-    public static final int JACK_REVERSE = 1;
+    public static final int FRONT_JACK_FORWARD = 6;
+    public static final int FRONT_JACK_REVERSE = 7;
+    public static final int BACK_JACK_FORWARD = 0;
+    public static final int BACK_JACK_REVERSE = 1;
   }
 }

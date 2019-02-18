@@ -11,8 +11,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Drive.ToggleJack;
+import frc.robot.commands.Drive.ClimbPlatform;
 import frc.robot.commands.Wrist.IntakeControl;
 import frc.robot.commands.Wrist.ToggleGripper;
 import frc.robot.commands.Wrist.ToggleHatchLifter;
@@ -36,17 +35,17 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     
-    // try {
-    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
-    // } catch (Exception e) {
-    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
-    // }
+    try {
+      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
+    }
 
-    // try {
-    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
-    // } catch (Exception e) {
-    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
-    // }
+    try {
+      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
+    }
 
     oi = new OI();
 
@@ -68,7 +67,7 @@ public class Robot extends TimedRobot {
 
   private void commonInit() {
     oi.joystick.y.whenPressed(new ToggleHatchLifter());
-    oi.joystick.b.whenPressed(new ToggleJack());
+    oi.joystick.b.whenPressed(new ClimbPlatform());
 
     oi.joystick.lefJoystickButton.whenPressed(new IntakeControl(IntakeState.IN));
     oi.joystick.righJoystickButton.whenPressed(new IntakeControl(IntakeState.OUT));

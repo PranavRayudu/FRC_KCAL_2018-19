@@ -24,9 +24,11 @@ public class Drive extends Subsystem {
   private Talon rightPWM;
   private DifferentialDrive drive;
 
-  private DoubleSolenoid jack;
+  private DoubleSolenoid frontJack;
+  private DoubleSolenoid backJack;
 
-  private boolean driveJackState;
+  private boolean frontJackState;
+  private boolean backJackState;
 
   public Drive() {
     
@@ -35,9 +37,14 @@ public class Drive extends Subsystem {
 
     drive = new DifferentialDrive(leftPWM, rightPWM);
 
-    jack = new DoubleSolenoid(
-      RobotMap.Pneumatics.JACK_FORWARD, 
-      RobotMap.Pneumatics.JACK_REVERSE
+    frontJack = new DoubleSolenoid(
+      RobotMap.Pneumatics.FRONT_JACK_FORWARD, 
+      RobotMap.Pneumatics.FRONT_JACK_REVERSE
+    );
+
+    backJack = new DoubleSolenoid(
+      RobotMap.Pneumatics.BACK_JACK_FORWARD, 
+      RobotMap.Pneumatics.BACK_JACK_REVERSE
     );
   }
 
@@ -53,14 +60,24 @@ public class Drive extends Subsystem {
     //drive.arcadeDrive(xSpeed, zRotation);
   }
 
-  private void setJack(boolean state) {
+  private void setFrontJack(boolean state) {
     DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    jack.set(val);
-    driveJackState = state;
+    frontJack.set(val);
+    frontJackState = state;
   }
 
-  public void toggleJack() {
-    setJack(!driveJackState);
+  private void setBackJack(boolean state) {
+    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+    backJack.set(val);
+    backJackState = state;
+  }
+
+  public void toggleFrontJack() {
+    setFrontJack(!frontJackState);
+  }
+
+  public void toggleBackjack() {
+    setBackJack(!backJackState);
   }
 
   @Override

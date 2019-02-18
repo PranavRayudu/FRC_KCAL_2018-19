@@ -29,17 +29,11 @@ public class Arm extends Subsystem {
     //armPWM.setNeutralMode(NeutralMode.Coast);
     //armPWM.neutralOutput();
     armPWM.setSensorPhase(false); // is your sensor going pos or neg
-    
-    // uncomment only if limit switches are added to arm
-    // put limit switch into talon port using standard stuff
-    // armPWM.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-    // armPWM.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
 
     // how many seconds to get to full speed
     //armPWM.configClosedloopRamp(0.5, 0); 
 
     // TODO: set all these PID controls
-    // Feast your eyes on 
     // https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/PositionClosedLoop/src/main/java/frc/robot/Robot.java
     // 
 		/* Config Position Closed Loop gains in slot0, tsypically kF stays zero. */

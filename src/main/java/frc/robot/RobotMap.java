@@ -19,28 +19,28 @@ public class RobotMap {
     public static final double INTAKE_OUT_PWR = 0.75;
     
     public static final double ARM_PWR = 0.75;
-    public static final double LIFT_AUTO_PWR = 0.3;
+    public static final double LIFT_AUTO_PWR = 0.5;
 
     public static final double DRIVE_HIGH = 0.75;
     public static final double DRIVE_LOW = 0.5;
 
-    public static final int kTimeoutMs = 0;
+    // public static final int kTimeoutMs = 0;
 
-    public class kArmGains {
-      public static final int kSlotIdx = 0;
-      public static final double kF = 0.0;
-      public static final double kP = 0.0;
-      public static final double kI = 0.0;
-      public static final double kD = 0.0;
-    }
+    // public class kArmGains {
+    //   public static final int kSlotIdx = 0;
+    //   public static final double kF = 0.0;
+    //   public static final double kP = 0.0;
+    //   public static final double kI = 0.0;
+    //   public static final double kD = 0.0;
+    // }
     
-    public class kLiftGains {
-      public static final int kSlotIdx = 0;
-      public static final double kF = 0.0;
-      public static final double kP = 0.0;
-      public static final double kI = 0.0;
-      public static final double kD = 0.0;
-    }
+    // public class kLiftGains {
+    //   public static final int kSlotIdx = 0;
+    //   public static final double kF = 0.0;
+    //   public static final double kP = 0.0;
+    //   public static final double kI = 0.0;
+    //   public static final double kD = 0.0;
+    // }
   }
 
   public class Sensors {

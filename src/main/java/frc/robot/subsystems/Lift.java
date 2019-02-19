@@ -33,21 +33,21 @@ public class Lift extends Subsystem {
     //liftPWM.setNeutralMode(NeutralMode.Brake);
     //liftPWM.neutralOutput();
     
-    liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    liftPWM.setSensorPhase(false); // is your sensor going pos or neg
+    // liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    // liftPWM.setSensorPhase(false); // is your sensor going pos or neg
     
-    liftPWM.config_kF(RobotMap.Constants.kLiftGains.kSlotIdx,
-        RobotMap.Constants.kLiftGains.kF, 
-        RobotMap.Constants.kTimeoutMs);
-    liftPWM.config_kP(RobotMap.Constants.kLiftGains.kSlotIdx,
-        RobotMap.Constants.kLiftGains.kP, 
-        RobotMap.Constants.kTimeoutMs);
-    liftPWM.config_kI(RobotMap.Constants.kLiftGains.kSlotIdx,
-        RobotMap.Constants.kLiftGains.kI, 
-        RobotMap.Constants.kTimeoutMs);
-    liftPWM.config_kD(RobotMap.Constants.kLiftGains.kSlotIdx,
-        RobotMap.Constants.kLiftGains.kD, 
-        RobotMap.Constants.kTimeoutMs);
+    // liftPWM.config_kF(RobotMap.Constants.kLiftGains.kSlotIdx,
+    //     RobotMap.Constants.kLiftGains.kF, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // liftPWM.config_kP(RobotMap.Constants.kLiftGains.kSlotIdx,
+    //     RobotMap.Constants.kLiftGains.kP, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // liftPWM.config_kI(RobotMap.Constants.kLiftGains.kSlotIdx,
+    //     RobotMap.Constants.kLiftGains.kI, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // liftPWM.config_kD(RobotMap.Constants.kLiftGains.kSlotIdx,
+    //     RobotMap.Constants.kLiftGains.kD, 
+    //     RobotMap.Constants.kTimeoutMs);
   }
 
   public void setPwr(double val) {
@@ -62,12 +62,11 @@ public class Lift extends Subsystem {
     }
 
     liftPWM.set(ControlMode.PercentOutput, in);
-    System.out.println("lift raw vals are: " + liftPWM.getSelectedSensorPosition());
   }
 
-  public void setGoal(double goal) {
-    liftPWM.set(ControlMode.Position, goal);
-  }
+  // public void setGoal(double goal) {
+  //   liftPWM.set(ControlMode.Position, goal);
+  // }
 
   public boolean bottomedOut() {
     return bottomLimit.get();

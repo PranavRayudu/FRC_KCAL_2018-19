@@ -17,9 +17,7 @@ public class OI {
 
   public static CustomJoystick joystick;
   
-  public OI() {
+  public static void init() {
     joystick = new CustomJoystick(0);
   }
-
-
 }

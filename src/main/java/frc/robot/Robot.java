@@ -7,9 +7,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
 import frc.robot.commands.Lift.CalibrateLift;
@@ -24,8 +26,6 @@ import frc.robot.subsystems.Wrist;
 
 public class Robot extends TimedRobot {
 
-  public static OI oi;
-
   public static Drive drive;
   public static Lift lift;
   public static Arm arm;
@@ -36,19 +36,19 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     
-    // try {
-    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
-    // } catch (Exception e) {
-    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
-    // }
+    try {
+      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
+    }
 
-    // try {
-    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
-    // } catch (Exception e) {
-    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
-    // }
+    try {
+      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
+    } catch (Exception e) {
+      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
+    }
 
-    oi = new OI();
+    OI.init();
 
     drive = new Drive();
     lift = new Lift();
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData(drive);
     // SmartDashboard.putData(lift);
     // SmartDashboard.putData(arm);
-    // SmartDashboard.putData(wrist);
+    SmartDashboard.putData(wrist);
 
     compressor = new Compressor();
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
@@ -67,16 +67,16 @@ public class Robot extends TimedRobot {
   }
 
   private void commonInit() {
-    oi.joystick.a.whenPressed(new ToggleHatchLifter());
-    oi.joystick.b.whenPressed(new ToggleGripper());
+    OI.joystick.a.whenPressed(new ToggleHatchLifter());
+    OI.joystick.b.whenPressed(new ToggleGripper());
     
-    oi.joystick.x.whenPressed(new ToggleFrontJack());
-    oi.joystick.y.whenPressed(new ToggleBackJack());
+    OI.joystick.x.whenPressed(new ToggleFrontJack());
+    OI.joystick.y.whenPressed(new ToggleBackJack());
 
-    oi.joystick.start.whenPressed(new CalibrateLift());
+    OI.joystick.start.whenPressed(new CalibrateLift());
 
-    oi.joystick.lefJoystickButton.whenPressed(new IntakeOut());
-    oi.joystick.righJoystickButton.toggleWhenPressed(new IntakeIn());
+    OI.joystick.lefJoystickButton.whenPressed(new IntakeOut());
+    OI.joystick.righJoystickButton.toggleWhenPressed(new IntakeIn());
   }
 
   private void commonLoop() {

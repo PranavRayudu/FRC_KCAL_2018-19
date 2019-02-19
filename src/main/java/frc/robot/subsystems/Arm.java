@@ -28,36 +28,34 @@ public class Arm extends Subsystem {
 
     //armPWM.setNeutralMode(NeutralMode.Coast);
     //armPWM.neutralOutput();
-    armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    armPWM.setSensorPhase(false); // is your sensor going pos or neg
-    armPWM.setSelectedSensorPosition(0);
-    // how many seconds to get to full speed
+    // armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    // armPWM.setSensorPhase(false); // is your sensor going pos or neg
+    // armPWM.setSelectedSensorPosition(0);
+    // // how many seconds to get to full speed
     //armPWM.configClosedloopRamp(0.5, 0);
 
     // TODO: set all these PID controls
     // https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/PositionClosedLoop/src/main/java/frc/robot/Robot.java
     // 
 		/* Config Position Closed Loop gains in slot0, typically kF stays zero. */
-    armPWM.config_kF(RobotMap.Constants.kArmGains.kSlotIdx,
-        RobotMap.Constants.kArmGains.kF, 
-        RobotMap.Constants.kTimeoutMs);
-    armPWM.config_kP(RobotMap.Constants.kArmGains.kSlotIdx,
-        RobotMap.Constants.kArmGains.kP, 
-        RobotMap.Constants.kTimeoutMs);
-    armPWM.config_kI(RobotMap.Constants.kArmGains.kSlotIdx,
-        RobotMap.Constants.kArmGains.kI, 
-        RobotMap.Constants.kTimeoutMs);
-    armPWM.config_kD(RobotMap.Constants.kArmGains.kSlotIdx,
-        RobotMap.Constants.kArmGains.kD, 
-        RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kF(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kF, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kP(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kP, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kI(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kI, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kD(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kD, 
+    //     RobotMap.Constants.kTimeoutMs);
   }
 
   public void setPwr(double val) {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
     
     armPWM.set(ControlMode.PercentOutput, val * RobotMap.Constants.ARM_PWR);
-
-    System.out.println("arm raw vals are: " + armPWM.getSelectedSensorPosition());
   }
 
   @Override

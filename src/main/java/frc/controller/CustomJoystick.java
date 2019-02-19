@@ -96,6 +96,13 @@ public class CustomJoystick extends Joystick {
         return pov() == 45 || pov() == 90 || pov() == 135;
     }
 
+    public double dPadVertical() {
+        return dPadUp() ? 1 : dPadDown() ? -1 : 0;
+    }
+
+    public double dPadHorizontal() {
+        return dPadRight() ? 1 : dPadLeft() ? -1 : 0;
+    }
     private int pov() {
         return this.getPOV();
     }

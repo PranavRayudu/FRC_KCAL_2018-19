@@ -5,46 +5,38 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Wrist;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Wrist.IntakeState;
+import frc.robot.RobotMap;
 
-public class IntakeControl extends Command {
+public class CalibrateLift extends Command {
 
-  IntakeState state;
-
-  public IntakeControl(IntakeState state) {
-    requires(Robot.wrist);
-    this.state = state;
+  public CalibrateLift() {
+    requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-  
-  }
+  protected void initialize() {}
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.wrist.intakeState == state)
-      Robot.wrist.intakeState = IntakeState.STOP;  
-    else
-      Robot.wrist.intakeState = state;
+    Robot.lift.setPwr(-RobotMap.Constants.LIFT_AUTO_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.lift.bottomedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
+    Robot.lift.zeroOutEncoder();
   }
 
   // Called when another command which requires one or more of the same

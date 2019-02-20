@@ -18,15 +18,19 @@ public class ClimbPlatform extends CommandGroup {
   public ClimbPlatform() {
     requires(Robot.drive);
     
-    addSequential(new ToggleFrontJack());
+    addSequential(new ToggleFrontJack()); // lift front
     addSequential(new WaitCommand(1)); // let cylinder fully extend
     
-    addSequential(new TimedDrive(0.7, 0.7, 3));
-
-    addSequential(new ToggleBackJack());
+    addSequential(new TimedDrive(0.5, 0.5, 3)); // go forrward
+    
+    addSequential(new ToggleBackJack()); // lift back
+    addSequential(new ToggleFrontJack()); // lower front
     addSequential(new WaitCommand(1));
 
-    addSequential(new TimedDrive(0.7, 0.7, 3));
+    addSequential(new TimedDrive(0.5, 0.5, 3)); // go forward
+    addSequential(new ToggleBackJack()); // toggle back
+
+    addSequential(new TimedDrive(0.5, 0.5, 1)); // move forward
     
     // NOTE:
     // addSequential() and addParallel() have a second parameter, timeout

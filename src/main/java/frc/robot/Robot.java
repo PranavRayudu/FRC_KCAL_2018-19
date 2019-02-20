@@ -7,19 +7,20 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.commands.Drive.ClimbPlatform;
-import frc.robot.commands.Wrist.IntakeControl;
+import frc.robot.commands.Drive.ToggleBackJack;
+import frc.robot.commands.Drive.ToggleFrontJack;
+import frc.robot.commands.Lift.CalibrateLift;
+import frc.robot.commands.Wrist.IntakeIn;
+import frc.robot.commands.Wrist.IntakeOut;
 import frc.robot.commands.Wrist.ToggleGripper;
 import frc.robot.commands.Wrist.ToggleHatchLifter;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Wrist;
-import frc.robot.subsystems.Wrist.IntakeState;
 
 public class Robot extends TimedRobot {
 
@@ -35,17 +36,17 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     
-    try {
-      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
-    } catch (Exception e) {
-      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
-    }
+    // try {
+    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_ONE);
+    // } catch (Exception e) {
+    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_ONE);
+    // }
 
-    try {
-      CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
-    } catch (Exception e) {
-      System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
-    }
+    // try {
+    //   CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_TWO);
+    // } catch (Exception e) {
+    //   System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_TWO);
+    // }
 
     oi = new OI();
 
@@ -66,22 +67,20 @@ public class Robot extends TimedRobot {
   }
 
   private void commonInit() {
-    oi.joystick.y.whenPressed(new ToggleHatchLifter());
-    oi.joystick.b.whenPressed(new ClimbPlatform());
+    oi.joystick.a.whenPressed(new ToggleHatchLifter());
+    oi.joystick.b.whenPressed(new ToggleGripper());
+    
+    oi.joystick.x.whenPressed(new ToggleFrontJack());
+    oi.joystick.y.whenPressed(new ToggleBackJack());
 
-    oi.joystick.lefJoystickButton.whenPressed(new IntakeControl(IntakeState.IN));
-    oi.joystick.righJoystickButton.whenPressed(new IntakeControl(IntakeState.OUT));
+    oi.joystick.start.whenPressed(new CalibrateLift());
+
+    oi.joystick.lefJoystickButton.whenPressed(new IntakeOut());
+    oi.joystick.righJoystickButton.toggleWhenPressed(new IntakeIn());
   }
 
   private void commonLoop() {
     Scheduler.getInstance().run();
-
-    if(OI.joystick.dPadDown()) {
-      ToggleGripper togGrip = new ToggleGripper();
-      togGrip.start(); // TODO: check if gripper actually toggles
-    }
-
-    wrist.intakeLoop();
   }
 
   @Override

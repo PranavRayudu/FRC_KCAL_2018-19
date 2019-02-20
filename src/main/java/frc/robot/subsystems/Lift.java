@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,22 +20,34 @@ import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
   
-  DigitalInput topLimit;
   DigitalInput bottomLimit;
 
   TalonSRX liftPWM;
 
   public Lift() {
 
-    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
     
     //liftPWM.setNeutralMode(NeutralMode.Brake);
     //liftPWM.neutralOutput();
-    //liftPWM.setSensorPhase(false); // is your sensor going pos or neg
-    //liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    
+    liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    liftPWM.setSensorPhase(false); // is your sensor going pos or neg
+    
+    liftPWM.config_kF(RobotMap.Constants.kLiftGains.kSlotIdx,
+        RobotMap.Constants.kLiftGains.kF, 
+        RobotMap.Constants.kTimeoutMs);
+    liftPWM.config_kP(RobotMap.Constants.kLiftGains.kSlotIdx,
+        RobotMap.Constants.kLiftGains.kP, 
+        RobotMap.Constants.kTimeoutMs);
+    liftPWM.config_kI(RobotMap.Constants.kLiftGains.kSlotIdx,
+        RobotMap.Constants.kLiftGains.kI, 
+        RobotMap.Constants.kTimeoutMs);
+    liftPWM.config_kD(RobotMap.Constants.kLiftGains.kSlotIdx,
+        RobotMap.Constants.kLiftGains.kD, 
+        RobotMap.Constants.kTimeoutMs);
   }
 
   public void setPwr(double val) {
@@ -43,30 +55,31 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    if(topLimit.get()) {
-      in = Math.min(in, 0);
-      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
-    }
-
     if(bottomLimit.get()) {
-      in = Math.max(in, 0);
+      in = Math.min(in, 0);
+      zeroOutEncoder();
       OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
     }
 
     liftPWM.set(ControlMode.PercentOutput, in);
+    System.out.println("lift raw vals are: " + liftPWM.getSelectedSensorPosition());
   }
 
   public void setGoal(double goal) {
-    //liftPWM.set(ControlMode.Position, goal);
+    liftPWM.set(ControlMode.Position, goal);
   }
 
   public boolean bottomedOut() {
     return bottomLimit.get();
   }
 
-  public boolean toppedOut() {
-    return topLimit.get();
+  public void zeroOutEncoder() {
+    liftPWM.setSelectedSensorPosition(0);
   }
+
+  // public boolean toppedOut() {
+  //   return topLimit.get();
+  // }
 
   @Override
   public void initDefaultCommand() {

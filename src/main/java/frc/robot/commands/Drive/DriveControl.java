@@ -26,16 +26,12 @@ public class DriveControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    // Double Joystick control
-    // double rightVal = OI.joystick.rightStickY();
-    // double lefttVal = OI.joystick.leftStickY();
-    // Robot.driveBase.setRaw(rightVal, lefttVal);
-    
+  
     // Single Joystick control
     double forwardVal = - OI.joystick.leftStickY() * RobotMap.Constants.DRIVE_HIGH
                         - OI.joystick.rightStickY() * RobotMap.Constants.DRIVE_LOW;
-    double rotVal = OI.joystick.leftStickX();
+    double rotVal = OI.joystick.leftStickX() * RobotMap.Constants.DRIVE_HIGH
+                  + OI.joystick.rightStickX() * RobotMap.Constants.DRIVE_LOW;
 
     Robot.drive.setArcade(forwardVal, rotVal);
   }

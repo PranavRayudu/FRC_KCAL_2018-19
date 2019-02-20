@@ -5,44 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Lift;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class LiftControl extends Command {
-
-  public LiftControl() {
-    requires(Robot.lift);
+public class IntakeOut extends Command {
+  public IntakeOut() {
+    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    setTimeout(2);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    double pwr = OI.joystick.lb.get() ? 1:0
-                -OI.joystick.leftTrigger();
-
-    Robot.lift.setPwr(pwr);
+    Robot.wrist.setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.lift.setPwr(0);
+    Robot.wrist.setIntakePwr(0);
   }
 
   // Called when another command which requires one or more of the same

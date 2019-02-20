@@ -28,11 +28,6 @@ public class Wrist extends Subsystem {
   private Talon leftIntake;
   private Talon rightIntake;
 
-  public enum IntakeState { OUT, IN, STOP };
-
-  public IntakeState intakeState;
- 
-
   public Wrist() {
     
     hatchLifter = new DoubleSolenoid(
@@ -47,31 +42,13 @@ public class Wrist extends Subsystem {
     
     leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
     rightIntake = new Talon(RobotMap.Motors.RIGHT_INTAKE_PWM);
-
-    intakeState = IntakeState.STOP;
   }
 
   // intake controls
   
-  private void setIntakePwr(double val) {
+  public void setIntakePwr(double val) {
     leftIntake.set(val);
     rightIntake.set(val);
-  }
-
-  public void intakeLoop() {
-    if(!RobotMap.Config.ENABLE_MOTORS) return;
-    
-    // is this a bit overcomplicated? was s'posed to help set values easier
-    switch(intakeState) {
-      case STOP:
-        //setIntakePwr(0);
-      break;
-      case IN:
-        setIntakePwr(RobotMap.Constants.INTAKE_PWR);
-      break;
-      case OUT:
-        setIntakePwr(-RobotMap.Constants.INTAKE_PWR);
-    }
   }
 
   // horizontal controls

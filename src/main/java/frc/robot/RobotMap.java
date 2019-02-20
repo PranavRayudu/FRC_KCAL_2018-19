@@ -48,7 +48,10 @@ public class RobotMap {
     public static final int CAMERA_ONE = 0;
     public static final int CAMERA_TWO = 1;
 
+    public static final int LIFT_SWTICH_UP = 1;
     public static final int LIFT_SWTICH_DOWN = 0;
+
+    public static final int LED_STRIP = 2;
   }
 
   public class Motors {

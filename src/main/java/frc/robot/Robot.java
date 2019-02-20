@@ -9,6 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,6 +35,8 @@ public class Robot extends TimedRobot {
   public static Wrist wrist;
 
   private Compressor compressor;
+
+  DigitalOutput led;
 
   @Override
   public void robotInit() {
@@ -63,6 +68,8 @@ public class Robot extends TimedRobot {
     compressor = new Compressor();
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
 
+    led = new DigitalOutput(RobotMap.Sensors.LED_STRIP);
+
     System.out.println("Robot has turned on");
   }
 
@@ -79,7 +86,20 @@ public class Robot extends TimedRobot {
     OI.joystick.righJoystickButton.toggleWhenPressed(new IntakeIn());
   }
 
+  
+  public void updateLED() {
+    
+    if(DriverStation.getInstance().getAlliance() == Alliance.Red) {
+      led.set(false);
+    } else {
+      led.set(true);
+    }
+  }
+
   private void commonLoop() {
+    
+    updateLED();
+
     Scheduler.getInstance().run();
   }
 
@@ -93,6 +113,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    updateLED();
   }
 
   @Override

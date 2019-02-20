@@ -20,12 +20,14 @@ import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
   
+  DigitalInput topLimit;
   DigitalInput bottomLimit;
 
   TalonSRX liftPWM;
 
   public Lift() {
 
+    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
@@ -55,6 +57,11 @@ public class Lift extends Subsystem {
 
     double in = val;
 
+    // if(topLimit.get()) {
+    //   in = Math.max(in, 0);
+    //   OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
+    // }
+
     if(bottomLimit.get()) {
       in = Math.min(in, 0);
       zeroOutEncoder();
@@ -76,9 +83,9 @@ public class Lift extends Subsystem {
     liftPWM.setSelectedSensorPosition(0);
   }
 
-  // public boolean toppedOut() {
-  //   return topLimit.get();
-  // }
+  public boolean toppedOut() {
+    return topLimit.get();
+  }
 
   @Override
   public void initDefaultCommand() {

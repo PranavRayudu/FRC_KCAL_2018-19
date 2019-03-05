@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.Wrist.IntakeStop;
 
 /**
  * Add your docs here.
@@ -77,6 +78,6 @@ public class Wrist extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new IntakeControl(IntakeState.STOP));
+    setDefaultCommand(new IntakeStop());
   }
 }

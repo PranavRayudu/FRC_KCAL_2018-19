@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData(drive);
     // SmartDashboard.putData(lift);
     // SmartDashboard.putData(arm);
-    SmartDashboard.putData(wrist);
+    //SmartDashboard.putData(wrist);
 
     compressor = new Compressor();
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
@@ -88,12 +88,7 @@ public class Robot extends TimedRobot {
 
   
   public void updateLED() {
-    
-    if(DriverStation.getInstance().getAlliance() == Alliance.Red) {
-      led.set(false);
-    } else {
-      led.set(true);
-    }
+    led.set(DriverStation.getInstance().getAlliance() != Alliance.Red);
   }
 
   private void commonLoop() {

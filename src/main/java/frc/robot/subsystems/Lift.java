@@ -57,10 +57,10 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    // if(topLimit.get()) {
-    //   in = Math.max(in, 0);
-    //   OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
-    // }
+    if(topLimit.get()) {
+      in = Math.max(in, 0);
+      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
+    }
 
     if(bottomLimit.get()) {
       in = Math.min(in, 0);

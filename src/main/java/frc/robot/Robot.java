@@ -60,7 +60,7 @@ public class Robot extends TimedRobot {
     arm = new Arm();
     wrist = new Wrist();
 
-    // SmartDashboard.putData(drive);
+    SmartDashboard.putData(drive);
     // SmartDashboard.putData(lift);
     // SmartDashboard.putData(arm);
     //SmartDashboard.putData(wrist);

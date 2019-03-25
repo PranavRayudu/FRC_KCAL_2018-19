@@ -9,7 +9,6 @@ package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Wrist.IntakeState;
 
 public class IntakeIn extends Command {
@@ -21,13 +20,12 @@ public class IntakeIn extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.wrist.intakeState = IntakeState.IN;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
+    Robot.wrist.setIntakePwr(IntakeState.IN);
   }
 
   // Make this return true when this Command no longer needs to run execute()

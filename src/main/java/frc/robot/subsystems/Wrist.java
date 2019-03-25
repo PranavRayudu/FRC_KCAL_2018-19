@@ -50,9 +50,18 @@ public class Wrist extends Subsystem {
 
   // intake controls
   
-  public void setIntakePwr(double val) {
+  private void setIntakePwr(double val) {
     leftIntake.set(val);
     rightIntake.set(val);
+  }
+
+  public void setIntakePwr(IntakeState state) {
+    switch(state) {
+      case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
+      case OUT: setIntakePwr(-RobotMap.Constants.INTAKE_OUT_PWR);
+      case STOPPED: setIntakePwr(0.0f);
+      default: intakeState = state;
+    }
   }
 
   // horizontal controls

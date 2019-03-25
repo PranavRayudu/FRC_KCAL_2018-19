@@ -9,7 +9,6 @@ package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Wrist.IntakeState;
 
 public class IntakeOut extends Command {
@@ -21,13 +20,12 @@ public class IntakeOut extends Command {
   @Override
   protected void initialize() {
     setTimeout(1);
-    Robot.wrist.intakeState = IntakeState.OUT;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.setIntakePwr(-RobotMap.Constants.INTAKE_OUT_PWR);
+    Robot.wrist.setIntakePwr(IntakeState.OUT);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +37,6 @@ public class IntakeOut extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.wrist.setIntakePwr(0);
   }
 
   // Called when another command which requires one or more of the same

@@ -27,8 +27,8 @@ public class LiftControl extends Command {
   @Override
   protected void execute() {
     
-    double pwr = OI.joystick.lb.get() ? 1:0
-                -OI.joystick.leftTrigger();
+    double pwr = OI.logitechF310.lb.get() ? 1:0
+                -OI.logitechF310.leftTrigger();
 
     Robot.lift.setPwr(pwr);
   }

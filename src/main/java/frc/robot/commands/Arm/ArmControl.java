@@ -34,8 +34,8 @@ public class ArmControl extends Command {
 
     double pwr = 0.0;
 
-    pwr += OI.joystick.rightTrigger();
-    if(OI.joystick.rb.get())
+    pwr += OI.logitechF310.rightTrigger();
+    if(OI.logitechF310.rb.get())
       pwr -= 1.0;
 
     Robot.arm.setPwr(pwr);

@@ -9,9 +9,7 @@ package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.OI;
 import frc.robot.Robot;
-
 
 public class ShortArmLower extends Command {
   

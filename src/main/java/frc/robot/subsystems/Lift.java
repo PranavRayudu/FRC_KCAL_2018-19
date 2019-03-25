@@ -59,13 +59,13 @@ public class Lift extends Subsystem {
 
     if(topLimit.get()) {
       in = Math.max(in, 0);
-      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
+      OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
     }
 
     if(bottomLimit.get()) {
       in = Math.min(in, 0);
       zeroOutEncoder();
-      OI.joystick.setRumble(RumbleType.kLeftRumble, 1.0);
+      OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
     }
 
     liftPWM.set(ControlMode.PercentOutput, in);

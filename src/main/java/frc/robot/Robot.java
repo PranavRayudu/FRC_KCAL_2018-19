@@ -45,10 +45,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     
     try {
-      //UsbCamera wristCamera = 
+      UsbCamera wristCamera = 
       CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_WRIST);
-      //wristCamera.setFPS(20);
-      //wristCamera.setResolution(260, 195);
+      wristCamera.setFPS(20);
+      wristCamera.setResolution(260, 195);
 
       //wristCamera.setVideoMode(PixelFormat.kBGR, 260, 195, 20);
       
@@ -57,10 +57,10 @@ public class Robot extends TimedRobot {
     }
 
     try {
-      //UsbCamera liftCamera = 
+      UsbCamera liftCamera = 
       CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_LIFT);
-      //liftCamera.setFPS(20);
-      //liftCamera.setResolution(160, 120);
+      liftCamera.setFPS(20);
+      liftCamera.setResolution(160, 120);
 
     } catch (Exception e) {
       System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_LIFT);
@@ -108,17 +108,18 @@ public class Robot extends TimedRobot {
   }
 
   private void bindButtons() {
-    OI.joystick.a.whenPressed(new ToggleHatchLifter());
-    OI.joystick.b.whenPressed(new ToggleGripper());
     
-    OI.joystick.x.whenPressed(new ToggleFrontJack());
-    OI.joystick.y.whenPressed(new ToggleBackJack());
+    OI.logitechF310.a.whenPressed(new ToggleHatchLifter());
+    OI.logitechF310.b.whenPressed(new ToggleGripper());
+    
+    OI.logitechF310.x.whenPressed(new ToggleFrontJack());
+    OI.logitechF310.y.whenPressed(new ToggleBackJack());
 
     //OI.joystick.start.whenPressed(new CalibrateLift());
     //OI.joystick.back.whenPressed(new DepositHatch());
 
-    OI.joystick.lefJoystickButton.whenPressed(new IntakeOut());
-    OI.joystick.righJoystickButton.toggleWhenPressed(new IntakeIn());
+    OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
+    OI.logitechF310.righJoystickButton.toggleWhenPressed(new IntakeIn());
   }
   
   @Override

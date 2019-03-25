@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import frc.controller.CustomGamepad;
 import frc.controller.CustomJoystick;
 
 /**
@@ -15,9 +16,10 @@ import frc.controller.CustomJoystick;
  */
 public class OI {
 
-  public static CustomJoystick joystick;
+  public static CustomGamepad logitechF310;
+  public static CustomJoystick flightController;
   
   public static void init() {
-    joystick = new CustomJoystick(0);
+    logitechF310 = new CustomGamepad(0);
   }
 }

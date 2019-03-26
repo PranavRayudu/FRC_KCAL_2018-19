@@ -19,12 +19,15 @@ import frc.robot.commands.Wrist.IntakeStop;
  */
 
 public class Wrist extends Subsystem {
+
+  public enum IntakeState {IN, OUT, STOPPED};
   
   private DoubleSolenoid hatchLifter;
   private DoubleSolenoid gripper;
 
   private boolean hatchState;
   private boolean gripperState;
+  public IntakeState intakeState = IntakeState.STOPPED;
 
   private Talon leftIntake;
   private Talon rightIntake;

@@ -5,33 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Wrist;
+package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.subsystems.Wrist.IntakeState;
 
-public class IntakeStop extends Command {
-  public IntakeStop() {
-    requires(Robot.wrist);
+import frc.robot.OI;
+import frc.robot.Robot;
+
+
+public class ShortArmLower extends Command {
+  
+  public ShortArmLower() {
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.wrist.intakeState = IntakeState.STOPPED;
+    setTimeout(0.5f);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.setIntakePwr(0);
+
+    double pwr = -0.5;
+
+    Robot.arm.setPwr(pwr);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
@@ -43,5 +49,6 @@ public class IntakeStop extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

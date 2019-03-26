@@ -32,8 +32,8 @@ public class Drive extends Subsystem {
 
   public Drive() {
     
-    leftPWM = new Talon(RobotMap.Motors.LEFT_MOTOR_PWM);
-    rightPWM = new Talon(RobotMap.Motors.RIGHT_MOTOR_PWM);
+    leftPWM = new Talon(RobotMap.Motors.LEFT_DRIVE);
+    rightPWM = new Talon(RobotMap.Motors.RIGHT_DRIVE);
 
     drive = new DifferentialDrive(leftPWM, rightPWM);
 

@@ -5,37 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Arm;
+package frc.robot.commands.Hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
-public class ShortArmLower extends Command {
-  
-  public ShortArmLower() {
-    requires(Robot.arm);
+public class ToggleHatch extends Command {
+  public ToggleHatch() {
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    setTimeout(0.5f);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    double pwr = -0.5;
-
-    Robot.arm.setPwr(pwr);
+    Robot.hatch.toggleHatchSol();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return true;
   }
 
   // Called once after isFinished returns true

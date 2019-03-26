@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -17,16 +16,14 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DepositHatch;
 import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
-import frc.robot.commands.Lift.CalibrateLift;
-import frc.robot.commands.Wrist.IntakeIn;
-import frc.robot.commands.Wrist.IntakeOut;
-import frc.robot.commands.Wrist.ToggleGripper;
-import frc.robot.commands.Wrist.ToggleHatchLifter;
-import frc.robot.subsystems.Arm;
+import frc.robot.commands.Hatch.ToggleHatch;
+import frc.robot.commands.Intake.IntakeIn;
+import frc.robot.commands.Intake.IntakeOut;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Wrist;
 
@@ -34,8 +31,9 @@ public class Robot extends TimedRobot {
 
   public static Drive drive;
   public static Lift lift;
-  public static Arm arm;
   public static Wrist wrist;
+  public static Intake intake;
+  public static Hatch hatch;
 
   private Compressor compressor;
 
@@ -70,8 +68,9 @@ public class Robot extends TimedRobot {
 
     drive = new Drive();
     lift = new Lift();
-    arm = new Arm();
     wrist = new Wrist();
+    intake = new Intake();
+    hatch = new Hatch();
 
     //SmartDashboard.putData(drive);
     // SmartDashboard.putData(lift);
@@ -96,7 +95,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putString("lift is ", lift.bottomedOut() ? "bottomed out" : lift.toppedOut() ? "topped" : "in middle");
     
     String intakeText = "";
-    switch(wrist.intakeState) {
+    switch(intake.intakeState) {
       case IN: intakeText = "taking in";
       break;
       case OUT: intakeText = "going out";
@@ -109,8 +108,7 @@ public class Robot extends TimedRobot {
 
   private void bindButtons() {
     
-    OI.logitechF310.a.whenPressed(new ToggleHatchLifter());
-    OI.logitechF310.b.whenPressed(new ToggleGripper());
+    OI.logitechF310.a.whenPressed(new ToggleHatch());
     
     OI.logitechF310.x.whenPressed(new ToggleFrontJack());
     OI.logitechF310.y.whenPressed(new ToggleBackJack());

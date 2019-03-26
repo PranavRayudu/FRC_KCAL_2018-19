@@ -8,11 +8,14 @@
 package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class ToggleGripper extends Command {
-  public ToggleGripper() {
+
+public class WristControl extends Command {
+  
+  public WristControl() {
     requires(Robot.wrist);
   }
 
@@ -24,13 +27,14 @@ public class ToggleGripper extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.toggleGripperSol();
+
+    Robot.wrist.setPwr(OI.Axes.wristAxis() * RobotMap.Constants.ARM_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

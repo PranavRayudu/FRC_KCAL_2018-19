@@ -30,7 +30,7 @@ public class Lift extends Subsystem {
     topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
-    liftPWM = new TalonSRX(RobotMap.Motors.LIFT_MOTOR_PWM);
+    liftPWM = new TalonSRX(RobotMap.Motors.LIFT);
     
     //liftPWM.setNeutralMode(NeutralMode.Brake);
     //liftPWM.neutralOutput();

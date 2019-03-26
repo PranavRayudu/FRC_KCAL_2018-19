@@ -5,46 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Arm;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.Intake.IntakeState;
 
-
-public class ArmControl extends Command {
-  
-  public ArmControl() {
-    requires(Robot.arm);
+public class IntakeOut extends Command {
+  public IntakeOut() {
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    setTimeout(1);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    // boolean up = OI.joystick.getRawButton(RobotMap.Joystick.BTN_X);
-    // boolean down = OI.joystick.getRawButton(RobotMap.Joystick.BTN_Y);
-
-    // double pwr = (up ? 1.0 : 0.0) - (down ? 1.0 : 0.0);
-
-    double pwr = 0.0;
-
-    pwr += OI.logitechF310.rightTrigger();
-    if(OI.logitechF310.rb.get())
-      pwr -= 1.0;
-
-    Robot.arm.setPwr(pwr);
+    Robot.intake.setIntakePwr(IntakeState.OUT);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true

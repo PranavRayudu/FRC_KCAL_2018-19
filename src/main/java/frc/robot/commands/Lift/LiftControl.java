@@ -26,11 +26,7 @@ public class LiftControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    
-    double pwr = OI.logitechF310.lb.get() ? 1:0
-                -OI.logitechF310.leftTrigger();
-
-    Robot.lift.setPwr(pwr);
+    Robot.lift.setPwr(OI.Axes.liftAxis());
   }
 
   // Make this return true when this Command no longer needs to run execute()

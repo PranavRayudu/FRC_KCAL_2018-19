@@ -21,5 +21,35 @@ public class OI {
   
   public static void init() {
     logitechF310 = new CustomGamepad(0);
+    //flightController = new CustomJoystick(1);
+  }
+
+  public static class Axes {
+    public static double driveForwardAxis() {
+    return - OI.logitechF310.leftStickY() * RobotMap.Constants.DRIVE_HIGH
+           - OI.logitechF310.rightStickY() * RobotMap.Constants.DRIVE_LOW
+           + OI.logitechF310.dPadVertical() * RobotMap.Constants.DRIVE_LOW;
+
+    }
+
+    public static double driveRotAxis() {
+      return  OI.logitechF310.leftStickX() * RobotMap.Constants.DRIVE_HIGH
+            + OI.logitechF310.rightStickX() * RobotMap.Constants.DRIVE_LOW
+            + OI.logitechF310.dPadHorizontal() * RobotMap.Constants.DRIVE_LOW;
+    }
+
+    public static double liftAxis() {
+      return OI.logitechF310.lb.get() ? 1:0
+           - OI.logitechF310.leftTrigger();
+    }
+
+    public static double wristAxis() {
+      double pwr = 0.0;
+      pwr += OI.logitechF310.rightTrigger();
+      
+      if(OI.logitechF310.rb.get())
+        pwr -= 1.0;
+      return pwr;
+    }
   }
 }

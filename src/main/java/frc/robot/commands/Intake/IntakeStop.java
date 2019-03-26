@@ -5,15 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Wrist;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
+import frc.robot.subsystems.Intake.IntakeState;
 
-public class ToggleHatchLifter extends Command {
-  public ToggleHatchLifter() {
-    requires(Robot.wrist);
+public class IntakeStop extends Command {
+  public IntakeStop() {
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
@@ -24,13 +24,13 @@ public class ToggleHatchLifter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.wrist.toggleHatchSol();
+    Robot.intake.setIntakePwr(IntakeState.STOPPED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -42,6 +42,5 @@ public class ToggleHatchLifter extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

@@ -43,6 +43,6 @@ public class CalibrateLift extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    // do not run end
   }
 }

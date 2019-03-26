@@ -7,89 +7,57 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.Wrist.IntakeStop;
+import frc.robot.commands.Wrist.WristControl;
 
 /**
  * Add your docs here.
  */
-
 public class Wrist extends Subsystem {
-
-  public enum IntakeState {IN, OUT, STOPPED};
   
-  private DoubleSolenoid hatchLifter;
-  private DoubleSolenoid gripper;
-
-  private boolean hatchState;
-  private boolean gripperState;
-  public IntakeState intakeState = IntakeState.STOPPED;
-
-  private Talon leftIntake;
-  private Talon rightIntake;
+  TalonSRX wristPWM;
 
   public Wrist() {
+    wristPWM = new TalonSRX(RobotMap.Motors.WRIST);
+
+    //armPWM.setNeutralMode(NeutralMode.Coast);
+    //armPWM.neutralOutput();
+    // armPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    // armPWM.setSensorPhase(false); // is your sensor going pos or neg
+    // armPWM.setSelectedSensorPosition(0);
+    // // how many seconds to get to full speed
+    //armPWM.configClosedloopRamp(0.5, 0);
+
+    // TODO: set all these PID controls
+    // https://github.com/CrossTheRoadElec/Phoenix-Examples-Languages/blob/master/Java/PositionClosedLoop/src/main/java/frc/robot/Robot.java
+    // 
+		/* Config Position Closed Loop gains in slot0, typically kF stays zero. */
+    // armPWM.config_kF(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kF, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kP(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kP, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kI(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kI, 
+    //     RobotMap.Constants.kTimeoutMs);
+    // armPWM.config_kD(RobotMap.Constants.kArmGains.kSlotIdx,
+    //     RobotMap.Constants.kArmGains.kD, 
+    //     RobotMap.Constants.kTimeoutMs);
+  }
+
+  public void setPwr(double val) {
+    if(!RobotMap.Config.ENABLE_MOTORS) return;
     
-    hatchLifter = new DoubleSolenoid(
-      RobotMap.Pneumatics.HATCH_LIFTER_FORWARD, 
-      RobotMap.Pneumatics.HATCH_LIFTER_REVERSE
-    );
-
-    gripper = new DoubleSolenoid(
-      RobotMap.Pneumatics.GIRPPER_FORWARD, 
-      RobotMap.Pneumatics.GRIPPER_REVERSE
-    );
-    
-    leftIntake = new Talon(RobotMap.Motors.LEFT_INTAKE_PWM);
-    rightIntake = new Talon(RobotMap.Motors.RIGHT_INTAKE_PWM);
-  }
-
-  // intake controls
-  
-  private void setIntakePwr(double val) {
-    leftIntake.set(val);
-    rightIntake.set(val);
-  }
-
-  public void setIntakePwr(IntakeState state) {
-    switch(state) {
-      case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
-      case OUT: setIntakePwr(-RobotMap.Constants.INTAKE_OUT_PWR);
-      case STOPPED: setIntakePwr(0.0f);
-      default: intakeState = state;
-    }
-  }
-
-  // horizontal controls
-
-  private void setGripperSol(boolean state) {
-    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    gripper.set(val);
-    gripperState = state;
-  }
-  
-  public void toggleGripperSol() {
-    setGripperSol(!gripperState);
-  }
-
-  // pusher and vertical solenoid controls
-
-  private void setHatchSol(boolean state) {
-    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    hatchLifter.set(val);
-    hatchState = state;
-  }
-  
-  public void toggleHatchSol() {
-    setHatchSol(!hatchState);
+    wristPWM.set(ControlMode.PercentOutput, val);
   }
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new IntakeStop());
+    setDefaultCommand(new WristControl());
   }
 }

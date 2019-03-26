@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * Joystick class wrapper for Logitech F310 and Xbox 360/One controllers
  */
 public class CustomGamepad extends Joystick {
 
@@ -28,19 +28,19 @@ public class CustomGamepad extends Joystick {
     public CustomGamepad(final int port) {
         super(port);
 
-        a = new JoystickButton(this, RobotMap.Joystick.BTN_A);
-        b = new JoystickButton(this, RobotMap.Joystick.BTN_B);
-        x = new JoystickButton(this, RobotMap.Joystick.BTN_X);
-        y = new JoystickButton(this, RobotMap.Joystick.BTN_Y);
+        a  = new JoystickButton(this, RobotMap.xInputGamepad.BTN_A);
+        b  = new JoystickButton(this, RobotMap.xInputGamepad.BTN_B);
+        x  = new JoystickButton(this, RobotMap.xInputGamepad.BTN_X);
+        y  = new JoystickButton(this, RobotMap.xInputGamepad.BTN_Y);
 
-        lb = new JoystickButton(this, RobotMap.Joystick.BTN_LB);
-        rb = new JoystickButton(this, RobotMap.Joystick.BTN_RB);
+        lb = new JoystickButton(this, RobotMap.xInputGamepad.BTN_LB);
+        rb = new JoystickButton(this, RobotMap.xInputGamepad.BTN_RB);
 
-        start = new JoystickButton(this, RobotMap.Joystick.BTN_START);
-        back  = new JoystickButton(this, RobotMap.Joystick.BTN_BACK);
+        start = new JoystickButton(this, RobotMap.xInputGamepad.BTN_START);
+        back  = new JoystickButton(this, RobotMap.xInputGamepad.BTN_BACK);
         
-        lefJoystickButton = new JoystickButton(this, RobotMap.Joystick.BTN_LEFT_JOYSTICK);
-        righJoystickButton = new JoystickButton(this, RobotMap.Joystick.BTN_RIGHT_JOYSTICK);
+        lefJoystickButton = new JoystickButton(this, RobotMap.xInputGamepad.BTN_LEFT_JOYSTICK);
+        righJoystickButton = new JoystickButton(this, RobotMap.xInputGamepad.BTN_RIGHT_JOYSTICK);
     }
 
     private double applyThreshold(double val) {
@@ -49,35 +49,35 @@ public class CustomGamepad extends Joystick {
 
     public double rightStickX() {
         this.getRawAxis(0);
-        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_X_AXIS));
+        return applyThreshold(this.getRawAxis(RobotMap.xInputGamepad.RIGHT_X_AXIS));
     }
 
     public double rightStickY() {
-        return applyThreshold(this.getRawAxis(RobotMap.Joystick.RIGHT_Y_AXIS));
+        return applyThreshold(this.getRawAxis(RobotMap.xInputGamepad.RIGHT_Y_AXIS));
     }
 
     public double leftStickX() {
-        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_X_AXIS));
+        return applyThreshold(this.getRawAxis(RobotMap.xInputGamepad.LEFT_X_AXIS));
     }
 
     public double leftStickY() {
-        return applyThreshold(this.getRawAxis(RobotMap.Joystick.LEFT_Y_AXIS));
+        return applyThreshold(this.getRawAxis(RobotMap.xInputGamepad.LEFT_Y_AXIS));
     }
 
     public boolean leftTriggerPressed() {
-        return this.getRawAxis(RobotMap.Joystick.LEFT_TRIGGER) > triggerThreshold;
+        return this.getRawAxis(RobotMap.xInputGamepad.LEFT_TRIGGER) > triggerThreshold;
     }
 
     public boolean rightTriggerPressed() {
-        return this.getRawAxis(RobotMap.Joystick.RIGHT_TRIGGER) > triggerThreshold;
+        return this.getRawAxis(RobotMap.xInputGamepad.RIGHT_TRIGGER) > triggerThreshold;
     }
 
     public double leftTrigger() {
-        return this.getRawAxis(RobotMap.Joystick.LEFT_TRIGGER);
+        return this.getRawAxis(RobotMap.xInputGamepad.LEFT_TRIGGER);
     }
 
     public double rightTrigger() {
-        return this.getRawAxis(RobotMap.Joystick.RIGHT_TRIGGER);
+        return this.getRawAxis(RobotMap.xInputGamepad.RIGHT_TRIGGER);
     }
 
     public boolean dPadUp() {

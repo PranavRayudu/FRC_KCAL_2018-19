@@ -28,12 +28,8 @@ public class DriveControl extends Command {
   protected void execute() {
   
     // Single Joystick control
-    double forwardVal = - OI.logitechF310.leftStickY() * RobotMap.Constants.DRIVE_HIGH
-                        - OI.logitechF310.rightStickY() * RobotMap.Constants.DRIVE_LOW
-                        + OI.logitechF310.dPadVertical() * RobotMap.Constants.DRIVE_LOW;
-    double rotVal = OI.logitechF310.leftStickX() * RobotMap.Constants.DRIVE_HIGH
-                  + OI.logitechF310.rightStickX() * RobotMap.Constants.DRIVE_LOW
-                  + OI.logitechF310.dPadHorizontal() * RobotMap.Constants.DRIVE_LOW;;
+    double forwardVal = OI.Axes.driveForwardAxis();
+    double rotVal = OI.Axes.driveRotAxis();
 
     Robot.drive.setArcade(forwardVal, rotVal);
   }

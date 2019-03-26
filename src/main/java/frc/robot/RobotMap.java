@@ -55,23 +55,22 @@ public class RobotMap {
   }
 
   public class Motors {
-    public static final int LEFT_MOTOR_PWM = 1;
-    public static final int RIGHT_MOTOR_PWM = 0;
+    public static final int LEFT_DRIVE = 1;
+    public static final int RIGHT_DRIVE = 0;
 
-    public static final int LEFT_INTAKE_PWM = 2;
-    public static final int RIGHT_INTAKE_PWM = 3;
+    public static final int INTAKE = 2;
         
     // CAN wired, so ports refer to Device ID
-    public static final int ARM_MOTOR_PWM = 3;
-    public static final int LIFT_MOTOR_PWM = 2;
+    public static final int WRIST = 3;
+    public static final int LIFT = 2;
   }
 
   public class Pneumatics {
-    public static final int HATCH_LIFTER_FORWARD = 0;
-    public static final int HATCH_LIFTER_REVERSE = 1;
+    public static final int HATCH_UPWARD = 0;
+    public static final int HATCH_DOWNWARD = 1;
 
-    public static final int GIRPPER_FORWARD = 2;
-    public static final int GRIPPER_REVERSE = 3;
+    public static final int HATCH_FORWARD = 2;
+    public static final int HATCH_REVERSE = 3;
 
     public static final int FRONT_JACK_FORWARD = 6;
     public static final int FRONT_JACK_REVERSE = 7;
@@ -80,7 +79,7 @@ public class RobotMap {
     public static final int BACK_JACK_REVERSE = 5;
   }
   
-  public class Joystick {
+  public class xInputGamepad {
 
     public static final int LEFT_X_AXIS = 0;
     public static final int LEFT_Y_AXIS = 1;
@@ -103,5 +102,9 @@ public class RobotMap {
     public static final int BTN_START = 8;
     public static final int BTN_LEFT_JOYSTICK = 9;
     public static final int BTN_RIGHT_JOYSTICK = 10;
+  }
+
+  public class FlightJoystick {
+
   }
 }

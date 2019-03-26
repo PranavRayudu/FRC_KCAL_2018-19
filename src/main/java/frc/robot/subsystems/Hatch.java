@@ -17,24 +17,49 @@ import frc.robot.RobotMap;
  */
 public class Hatch extends Subsystem {
 
-  private DoubleSolenoid hatchLifter;
-  private boolean hatchState;
+  private DoubleSolenoid claw;
+  private DoubleSolenoid extender;
   
+  private boolean clawState;
+  private boolean extenderState;
+
   public Hatch() {
-    hatchLifter = new DoubleSolenoid(
+    
+    claw = new DoubleSolenoid(
       RobotMap.Pneumatics.HATCH_UPWARD, 
       RobotMap.Pneumatics.HATCH_DOWNWARD
     );
+
+    clawState = true;
+    setClawSol(clawState);
+
+    extender = new DoubleSolenoid(
+      RobotMap.Pneumatics.HATCH_FORWARD, 
+      RobotMap.Pneumatics.HATCH_REVERSE
+    );
+
+    extenderState = false;
+    setHatchExtentionSol(extenderState);
   }
 
-  private void setHatchSol(boolean state) {
+  private void setClawSol(boolean state) {
     DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    hatchLifter.set(val);
-    hatchState = state;
+    claw.set(val);
+    clawState = state;
   }
   
-  public void toggleHatchSol() {
-    setHatchSol(!hatchState);
+  public void toggleClawSol() {
+    setClawSol(!clawState);
+  }
+
+  private void setHatchExtentionSol(boolean state) {
+    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+    extender.set(val);
+    extenderState = state;
+  }
+
+  public void toggleExtenderSol() {
+    setHatchExtentionSol(!extenderState);
   }
 
   @Override

@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -40,7 +38,7 @@ public class Intake extends Subsystem {
   public void setIntakePwr(IntakeState state) {
     switch(state) {
       case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
-      case OUT: setIntakePwr(-RobotMap.Constants.INTAKE_OUT_PWR);
+      case OUT: setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
       case STOPPED: setIntakePwr(0.0f);
       default: intakeState = state;
     }

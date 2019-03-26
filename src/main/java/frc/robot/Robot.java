@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
-import frc.robot.commands.Hatch.ToggleHatch;
+import frc.robot.commands.Hatch.ToggleHatchClaw;
+import frc.robot.commands.Hatch.ToggleHatchExtender;
 import frc.robot.commands.Intake.IntakeIn;
 import frc.robot.commands.Intake.IntakeOut;
 import frc.robot.subsystems.Drive;
@@ -72,11 +73,6 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     hatch = new Hatch();
 
-    //SmartDashboard.putData(drive);
-    // SmartDashboard.putData(lift);
-    // SmartDashboard.putData(arm);
-    //SmartDashboard.putData(wrist);
-
     compressor = new Compressor();
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
 
@@ -108,8 +104,9 @@ public class Robot extends TimedRobot {
 
   private void bindButtons() {
     
-    OI.logitechF310.a.whenPressed(new ToggleHatch());
-    
+    OI.logitechF310.a.whenPressed(new ToggleHatchClaw());
+    OI.logitechF310.b.whenPressed(new ToggleHatchExtender());
+
     OI.logitechF310.x.whenPressed(new ToggleFrontJack());
     OI.logitechF310.y.whenPressed(new ToggleBackJack());
 
@@ -127,8 +124,6 @@ public class Robot extends TimedRobot {
   private void commonInit() {
     bindButtons();
     postDashboardValues();
-
-    //SmartDashboard.getBoolean(key, defaultValue);
   }
 
   private void commonLoop() {

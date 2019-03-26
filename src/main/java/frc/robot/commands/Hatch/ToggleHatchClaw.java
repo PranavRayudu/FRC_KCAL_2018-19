@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.Robot;
 
-public class ToggleHatch extends Command {
-  public ToggleHatch() {
-    requires(Robot.intake);
+public class ToggleHatchClaw extends Command {
+  public ToggleHatchClaw() {
+    requires(Robot.hatch);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ public class ToggleHatch extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.toggleHatchSol();
+    Robot.hatch.toggleClawSol();
   }
 
   // Make this return true when this Command no longer needs to run execute()

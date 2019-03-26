@@ -29,7 +29,6 @@ public class OI {
     return - OI.logitechF310.leftStickY() * RobotMap.Constants.DRIVE_HIGH
            - OI.logitechF310.rightStickY() * RobotMap.Constants.DRIVE_LOW
            + OI.logitechF310.dPadVertical() * RobotMap.Constants.DRIVE_LOW;
-
     }
 
     public static double driveRotAxis() {

@@ -31,7 +31,7 @@ public class Intake extends Subsystem {
 
   // intake controls
   
-  private void setIntakePwr(double val) {
+  public void setIntakePwr(double val) {
     intake.set(val);
   }
 

@@ -9,7 +9,7 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Intake.IntakeState;
+import frc.robot.RobotMap;
 
 public class IntakeOut extends Command {
   public IntakeOut() {
@@ -25,7 +25,8 @@ public class IntakeOut extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intake.setIntakePwr(IntakeState.OUT);
+    //Robot.intake.setIntakePwr(IntakeState.OUT);
+    Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()

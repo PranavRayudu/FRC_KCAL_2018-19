@@ -10,19 +10,19 @@ package frc.robot;
 public class RobotMap {
 
   public class Config {
-    public static final boolean ENABLE_PNEUMATICS = true; 
+    public static final boolean ENABLE_PNEUMATICS = false; 
     public static final boolean ENABLE_MOTORS = true;
   }
 
   public class Constants {
-    public static final double INTAKE_IN_PWR    = 0.25;
-    public static final double INTAKE_OUT_PWR   =-0.75;
+    public static final double INTAKE_IN_PWR    = 0.40f;
+    public static final double INTAKE_OUT_PWR   =-0.60f;
     
-    public static final double ARM_PWR          = 0.75;
-    public static final double LIFT_AUTO_PWR    = 0.50;
+    public static final double LIFT_AUTO_PWR    = 0.50f;
+    public static final double WRIST_PWR        = 0.50f;
 
-    public static final double DRIVE_HIGH       = 0.75;
-    public static final double DRIVE_LOW        = 0.50;
+    public static final double DRIVE_HIGH       = 0.80f;
+    public static final double DRIVE_LOW        = 0.50f;
 
     // public static final int kTimeoutMs = 0;
 

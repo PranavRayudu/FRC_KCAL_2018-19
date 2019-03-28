@@ -10,7 +10,7 @@ package frc.robot;
 public class RobotMap {
 
   public class Config {
-    public static final boolean ENABLE_PNEUMATICS = false; 
+    public static final boolean ENABLE_PNEUMATICS = true; 
     public static final boolean ENABLE_MOTORS = true;
   }
 

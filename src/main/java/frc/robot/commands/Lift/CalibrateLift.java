@@ -24,7 +24,7 @@ public class CalibrateLift extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.lift.setPwr(-RobotMap.Constants.LIFT_AUTO_PWR);
+    //Robot.lift.setPwr(-RobotMap.Constants.LIFT_AUTO_HIGH_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -7,16 +7,19 @@
 
 package frc.robot.commands.Intake;
 
+import com.sun.javadoc.RootDoc;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Intake.IntakeState;
 
-public class IntakeIn extends Command {
+public class PoweredIntakeIn extends Command {
 
-  public IntakeIn() {
+  public PoweredIntakeIn() {
     requires(Robot.intake);
+    requires(Robot.wrist);
   }
 
   // Called just before this Command runs the first time
@@ -29,6 +32,7 @@ public class IntakeIn extends Command {
   protected void execute() {
     //Robot.intake.setIntakePwr(IntakeState.IN);
     Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
+    Robot.wrist.setPwr(RobotMap.Constants.WRIST_AUTO_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()

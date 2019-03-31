@@ -8,13 +8,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.OI;
 import frc.robot.RobotMap;
 import frc.robot.commands.Lift.LiftControl;
 
@@ -25,6 +23,9 @@ public class Lift extends Subsystem {
 
   TalonSRX liftPWM;
 
+  public boolean liftIntentUp;
+  public double liftGain;
+
   public Lift() {
 
     topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
@@ -32,7 +33,7 @@ public class Lift extends Subsystem {
 
     liftPWM = new TalonSRX(RobotMap.Motors.LIFT);
     
-    //liftPWM.setNeutralMode(NeutralMode.Brake);
+    liftPWM.setNeutralMode(NeutralMode.Brake);
     //liftPWM.neutralOutput();
     
     // liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
@@ -57,16 +58,16 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    if(topLimit.get()) {
-      in = Math.max(in, 0);
-      OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
-    }
+    // if(topLimit.get()) {
+    //   in = Math.max(in, 0);
+    //   OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
+    // }
 
-    if(bottomLimit.get()) {
-      in = Math.min(in, 0);
-      zeroOutEncoder();
-      OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
-    }
+    // if(bottomLimit.get()) {
+    //   in = Math.min(in, 0);
+    //   zeroOutEncoder();
+    //   OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
+    // }
 
     liftPWM.set(ControlMode.PercentOutput, in);
   }

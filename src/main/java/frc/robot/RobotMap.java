@@ -15,11 +15,12 @@ public class RobotMap {
   }
 
   public class Constants {
-    public static final double INTAKE_IN_PWR    = 0.40f;
-    public static final double INTAKE_OUT_PWR   =-0.60f;
+    public static final double INTAKE_IN_PWR    = 0.50f;
+    public static final double INTAKE_OUT_PWR   =-0.90f;
     
-    public static final double LIFT_AUTO_PWR    = 0.50f;
-    public static final double WRIST_PWR        = 0.50f;
+    public static final double WRIST_PWR        =-0.50f;
+    public static final double WRIST_AUTO_PWR   = 0.20f;
+    public static final double WRIST_DEAD_PWR   =-0.05f; // not used
 
     public static final double DRIVE_HIGH       = 0.80f;
     public static final double DRIVE_LOW        = 0.50f;

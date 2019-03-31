@@ -17,26 +17,26 @@ import frc.robot.RobotMap;
  */
 public class Hatch extends Subsystem {
 
-  private DoubleSolenoid claw;
-  private DoubleSolenoid extender;
+  // private DoubleSolenoid claw;
+  // private DoubleSolenoid extender;
   
   private boolean clawState;
   private boolean extenderState;
 
   public Hatch() {
     
-    claw = new DoubleSolenoid(
-      RobotMap.Pneumatics.HATCH_UPWARD, 
-      RobotMap.Pneumatics.HATCH_DOWNWARD
-    );
+    // claw = new DoubleSolenoid(
+    //   RobotMap.Pneumatics.HATCH_UPWARD, 
+    //   RobotMap.Pneumatics.HATCH_DOWNWARD
+    // );
 
     clawState = true;
     setClawSol(clawState);
 
-    extender = new DoubleSolenoid(
-      RobotMap.Pneumatics.HATCH_FORWARD, 
-      RobotMap.Pneumatics.HATCH_REVERSE
-    );
+    // extender = new DoubleSolenoid(
+    //   RobotMap.Pneumatics.HATCH_FORWARD, 
+    //   RobotMap.Pneumatics.HATCH_REVERSE
+    // );
 
     extenderState = false;
     setHatchExtentionSol(extenderState);
@@ -44,7 +44,7 @@ public class Hatch extends Subsystem {
 
   private void setClawSol(boolean state) {
     DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    claw.set(val);
+//    claw.set(val);
     clawState = state;
   }
   
@@ -54,7 +54,7 @@ public class Hatch extends Subsystem {
 
   private void setHatchExtentionSol(boolean state) {
     DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-    extender.set(val);
+//    extender.set(val);
     extenderState = state;
   }
 

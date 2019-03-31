@@ -20,8 +20,8 @@ import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
 import frc.robot.commands.Hatch.ToggleHatchClaw;
 import frc.robot.commands.Hatch.ToggleHatchExtender;
-import frc.robot.commands.Intake.IntakeIn;
 import frc.robot.commands.Intake.IntakeOut;
+import frc.robot.commands.Intake.PoweredIntakeIn;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
@@ -114,7 +114,9 @@ public class Robot extends TimedRobot {
     //OI.joystick.back.whenPressed(new DepositHatch());
 
     OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
-    OI.logitechF310.righJoystickButton.toggleWhenPressed(new IntakeIn());
+    OI.logitechF310.righJoystickButton.whileHeld(new PoweredIntakeIn());
+    
+    //OI.logitechF310.righJoystickButton.whenReleased(new TimedWristDown()); // take this out if you dont want wrist to go down after releasing joystick button
   }
   
   @Override

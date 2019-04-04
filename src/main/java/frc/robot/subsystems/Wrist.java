@@ -21,6 +21,7 @@ public class Wrist extends Subsystem {
 
   public Wrist() {
     wristPWM = new Talon(RobotMap.Motors.WRIST);
+    wristPWM.setSafetyEnabled(true);
   }
 
   public void setPwr(double val) {

@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -18,39 +19,26 @@ import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
   
-  DigitalInput topLimit;
-  DigitalInput bottomLimit;
+  private DigitalInput topLimit;
+  private DigitalInput bottomLimit;
+  
+  private TalonSRX rightLiftPWM;
+  private TalonSRX leftLiftPWM;
 
-  TalonSRX liftPWM;
-
-  public boolean liftIntentUp;
-  public double liftGain;
+  private boolean enablePID = false;
 
   public Lift() {
 
     topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
     bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
 
-    liftPWM = new TalonSRX(RobotMap.Motors.LIFT);
+    rightLiftPWM = new TalonSRX(RobotMap.Motors.RIGHT_LIFT);
+    leftLiftPWM = new TalonSRX(RobotMap.Motors.LEFT_LIFT);
+
+    rightLiftPWM.setNeutralMode(NeutralMode.Brake);
+    leftLiftPWM.setNeutralMode(NeutralMode.Brake);
     
-    liftPWM.setNeutralMode(NeutralMode.Brake);
-    //liftPWM.neutralOutput();
-    
-    // liftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    // liftPWM.setSensorPhase(false); // is your sensor going pos or neg
-    
-    // liftPWM.config_kF(RobotMap.Constants.kLiftGains.kSlotIdx,
-    //     RobotMap.Constants.kLiftGains.kF, 
-    //     RobotMap.Constants.kTimeoutMs);
-    // liftPWM.config_kP(RobotMap.Constants.kLiftGains.kSlotIdx,
-    //     RobotMap.Constants.kLiftGains.kP, 
-    //     RobotMap.Constants.kTimeoutMs);
-    // liftPWM.config_kI(RobotMap.Constants.kLiftGains.kSlotIdx,
-    //     RobotMap.Constants.kLiftGains.kI, 
-    //     RobotMap.Constants.kTimeoutMs);
-    // liftPWM.config_kD(RobotMap.Constants.kLiftGains.kSlotIdx,
-    //     RobotMap.Constants.kLiftGains.kD, 
-    //     RobotMap.Constants.kTimeoutMs);
+    rightLiftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
   }
 
   public void setPwr(double val) {
@@ -69,23 +57,36 @@ public class Lift extends Subsystem {
     //   OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
     // }
 
-    liftPWM.set(ControlMode.PercentOutput, in);
+    rightLiftPWM.set(ControlMode.PercentOutput, -in);
+    leftLiftPWM.set(ControlMode.PercentOutput, in);
   }
 
-  // public void setGoal(double goal) {
-  //   liftPWM.set(ControlMode.Position, goal);
-  // }
+  public void zeroOutEncoder() {
+    rightLiftPWM.setSelectedSensorPosition(0);
+  }
+
+  public double getEncoder() {
+    return rightLiftPWM.getSelectedSensorPosition();
+  }
 
   public boolean bottomedOut() {
     return bottomLimit.get();
   }
-
-  public void zeroOutEncoder() {
-    liftPWM.setSelectedSensorPosition(0);
-  }
-
+  
   public boolean toppedOut() {
     return topLimit.get();
+  }
+
+  public void setPIDEnabled(boolean state) {
+    this.enablePID = state;
+  }
+
+  public void togglePIDEnabled(){
+    setPIDEnabled(!enablePID);
+  }
+
+  public boolean getPIDenabled() {
+    return enablePID;
   }
 
   @Override

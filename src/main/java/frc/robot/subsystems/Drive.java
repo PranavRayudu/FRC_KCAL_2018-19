@@ -35,7 +35,9 @@ public class Drive extends Subsystem {
     leftPWM = new Talon(RobotMap.Motors.LEFT_DRIVE);
     rightPWM = new Talon(RobotMap.Motors.RIGHT_DRIVE);
 
-    //leftPWM.saf
+    leftPWM.setSafetyEnabled(true);
+    rightPWM.setSafetyEnabled(true);
+
     drive = new DifferentialDrive(leftPWM, rightPWM);
 
     frontJack = new DoubleSolenoid(

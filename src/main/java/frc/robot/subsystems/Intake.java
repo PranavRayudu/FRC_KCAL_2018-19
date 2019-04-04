@@ -26,6 +26,7 @@ public class Intake extends Subsystem {
 
   public Intake() {
     intake = new Talon(RobotMap.Motors.INTAKE);
+    intake.setSafetyEnabled(true);
     intakeState = IntakeState.STOPPED;
   }
 

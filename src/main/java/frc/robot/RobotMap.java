@@ -24,24 +24,13 @@ public class RobotMap {
 
     public static final double DRIVE_HIGH       = 0.80f;
     public static final double DRIVE_LOW        = 0.50f;
-
-    // public static final int kTimeoutMs = 0;
-
-    // public class kArmGains {
-    //   public static final int kSlotIdx = 0;
-    //   public static final double kF = 0.0;
-    //   public static final double kP = 0.0;
-    //   public static final double kI = 0.0;
-    //   public static final double kD = 0.0;
-    // }
     
-    // public class kLiftGains {
-    //   public static final int kSlotIdx = 0;
-    //   public static final double kF = 0.0;
-    //   public static final double kP = 0.0;
-    //   public static final double kI = 0.0;
-    //   public static final double kD = 0.0;
-    // }
+    public class kLiftGains {
+      public static final double kF = 0.0;
+      public static final double kP = 1.0;
+      public static final double kI = 1.0;
+      public static final double kD = 1.0;
+    }
   }
 
   public class Sensors {
@@ -59,11 +48,12 @@ public class RobotMap {
     public static final int LEFT_DRIVE = 1;
     public static final int RIGHT_DRIVE = 0;
 
-    public static final int INTAKE = 2;
-        
-    // CAN wired, so ports refer to Device ID
+    public static final int INTAKE = 2;    
     public static final int WRIST = 3;
-    public static final int LIFT = 2;
+
+    // CAN wired, so ports refer to Device ID
+    public static final int RIGHT_LIFT = 2;
+    public static final int LEFT_LIFT = 3;
   }
 
   public class Pneumatics {

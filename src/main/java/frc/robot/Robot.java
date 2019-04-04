@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
     OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
     OI.logitechF310.righJoystickButton.whileHeld(new PoweredIntakeIn());
     
-    //OI.logitechF310.righJoystickButton.whenReleased(new TimedWristDown()); // take this out if you dont want wrist to go down after releasing joystick button
+    //OI.logitechF310.rightJoystickButton.whenReleased(new TimedWristDown()); // take this out if you dont want wrist to go down after releasing joystick button
   }
   
   @Override
@@ -132,6 +132,9 @@ public class Robot extends TimedRobot {
     
     updateLED();
     postDashboardValues();
+
+    System.out.println("encoder @: " + lift.getEncoder());
+
     Scheduler.getInstance().run();
   }
 

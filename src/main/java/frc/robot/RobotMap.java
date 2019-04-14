@@ -106,4 +106,24 @@ public class RobotMap {
   public class FlightJoystick {
 
   }
+
+  public class ButtonBoard {
+    public static final int TURBO = 0;
+    public static final int MACRO = 0;
+    public static final int HOME = 0;
+    public static final int SHARE = 0;
+    public static final int OPTIONS = 0;
+
+    public static final int LB = 0;
+    public static final int LT = 0;
+    public static final int RB = 0;
+    public static final int RT = 0;
+    public static final int SL = 0;
+    public static final int SR = 0;
+
+    public static final int X = 0;
+    public static final int Y = 0;
+    public static final int A = 0;
+    public static final int B = 0;
+  }
 }

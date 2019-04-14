@@ -19,6 +19,7 @@ public class CustomJoystick extends Joystick {
 
     public JoystickButton trigger;
     public JoystickButton b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12;
+    public CustomDPad dpad;
 
     public CustomJoystick(final int port) {
         super(port);
@@ -35,6 +36,8 @@ public class CustomJoystick extends Joystick {
         b10 = new JoystickButton(this, 10);
         b11 = new JoystickButton(this, 11);
         b12 = new JoystickButton(this, 12);
+        
+        dpad = new CustomDPad(this);
     }
 
     private double applyThreshold(double val) {
@@ -55,32 +58,5 @@ public class CustomJoystick extends Joystick {
 
     public double slider() {
         return applyThreshold(getRawAxis(3));
-    }
-
-    public boolean dPadUp() {
-        return pov() == 315 || pov() == 0 || pov() == 45;
-    }
-
-    public boolean dPadDown() {
-        return pov() == 135 || pov() == 180 || pov() == 225;
-    }
-
-    public boolean dPadLeft() {
-        return pov() == 225 || pov() == 270 || pov() == 315;
-    }
-
-    public boolean dPadRight() {
-        return pov() == 45 || pov() == 90 || pov() == 135;
-    }
-
-    public double dPadVertical() {
-        return dPadUp() ? 1 : dPadDown() ? -1 : 0;
-    }
-
-    public double dPadHorizontal() {
-        return dPadRight() ? 1 : dPadLeft() ? -1 : 0;
-    }
-    private int pov() {
-        return this.getPOV();
     }
 }

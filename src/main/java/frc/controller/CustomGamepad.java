@@ -25,6 +25,8 @@ public class CustomGamepad extends Joystick {
     public JoystickButton start, back;
     public JoystickButton lefJoystickButton, righJoystickButton;
 
+    public CustomDPad dpad;
+
     public CustomGamepad(final int port) {
         super(port);
 
@@ -41,6 +43,8 @@ public class CustomGamepad extends Joystick {
         
         lefJoystickButton = new JoystickButton(this, RobotMap.xInputGamepad.BTN_LEFT_JOYSTICK);
         righJoystickButton = new JoystickButton(this, RobotMap.xInputGamepad.BTN_RIGHT_JOYSTICK);
+        
+        dpad = new CustomDPad(this);
     }
 
     private double applyThreshold(double val) {
@@ -78,32 +82,5 @@ public class CustomGamepad extends Joystick {
 
     public double rightTrigger() {
         return this.getRawAxis(RobotMap.xInputGamepad.RIGHT_TRIGGER);
-    }
-
-    public boolean dPadUp() {
-        return pov() == 315 || pov() == 0 || pov() == 45;
-    }
-
-    public boolean dPadDown() {
-        return pov() == 135 || pov() == 180 || pov() == 225;
-    }
-
-    public boolean dPadLeft() {
-        return pov() == 225 || pov() == 270 || pov() == 315;
-    }
-
-    public boolean dPadRight() {
-        return pov() == 45 || pov() == 90 || pov() == 135;
-    }
-
-    public double dPadVertical() {
-        return dPadUp() ? 1 : dPadDown() ? -1 : 0;
-    }
-
-    public double dPadHorizontal() {
-        return dPadRight() ? 1 : dPadLeft() ? -1 : 0;
-    }
-    private int pov() {
-        return this.getPOV();
     }
 }

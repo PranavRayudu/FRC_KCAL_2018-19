@@ -28,13 +28,13 @@ public class OI {
     public static double driveForwardAxis() {
     return - OI.logitechF310.leftStickY() * RobotMap.Constants.DRIVE_HIGH
            - OI.logitechF310.rightStickY() * RobotMap.Constants.DRIVE_LOW
-           + OI.logitechF310.dPadVertical() * RobotMap.Constants.DRIVE_LOW;
+           + OI.logitechF310.dpad.vertical() * RobotMap.Constants.DRIVE_LOW;
     }
 
     public static double driveRotAxis() {
       return  OI.logitechF310.leftStickX() * RobotMap.Constants.DRIVE_HIGH
             + OI.logitechF310.rightStickX() * RobotMap.Constants.DRIVE_LOW
-            + OI.logitechF310.dPadHorizontal() * RobotMap.Constants.DRIVE_LOW;
+            + OI.logitechF310.dpad.horizontal() * RobotMap.Constants.DRIVE_LOW;
     }
 
     public static double liftAxis() {

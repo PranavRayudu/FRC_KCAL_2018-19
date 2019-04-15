@@ -36,6 +36,7 @@ public class Intake extends Subsystem {
     intake.set(val);
   }
 
+  // NOTE: do not use - too slow
   public void setIntakePwr(IntakeState state) {
     switch(state) {
       case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);

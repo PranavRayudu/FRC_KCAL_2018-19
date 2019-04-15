@@ -25,7 +25,9 @@ public class Lift extends Subsystem {
   private TalonSRX rightLiftPWM;
   private TalonSRX leftLiftPWM;
 
-  private boolean enablePID = false;
+  private boolean enablePID = true;
+
+  private int heightState = 0;
 
   public Lift() {
 
@@ -39,6 +41,8 @@ public class Lift extends Subsystem {
     leftLiftPWM.setNeutralMode(NeutralMode.Brake);
     
     rightLiftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    rightLiftPWM.setSensorPhase(false);
+    zeroOutEncoder();
   }
 
   public void setPwr(double val) {
@@ -60,6 +64,16 @@ public class Lift extends Subsystem {
     rightLiftPWM.set(ControlMode.PercentOutput, -in);
     leftLiftPWM.set(ControlMode.PercentOutput, in);
   }
+
+  // public void setLiftLevel(int lv) {
+  //   switch(lv) {
+  //     case 0: 
+  //   }
+  // }
+
+  // public void usePID() {
+
+  // }
 
   public void zeroOutEncoder() {
     rightLiftPWM.setSelectedSensorPosition(0);

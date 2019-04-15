@@ -5,36 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Wrist;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-
-public class TimedWristDown extends Command {
-  
-  public TimedWristDown() {
-    requires(Robot.wrist);
+public class TogglePIDEnabled extends Command {
+  public TogglePIDEnabled() {
+    requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    setTimeout(0.5);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.wrist.setPwr(RobotMap.Constants.WRIST_PWR);
+    Robot.lift.togglePIDEnabled();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return true;
   }
 
   // Called once after isFinished returns true
@@ -46,6 +41,5 @@ public class TimedWristDown extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

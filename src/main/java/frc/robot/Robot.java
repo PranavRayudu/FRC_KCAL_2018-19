@@ -18,10 +18,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
-import frc.robot.commands.Hatch.ToggleHatchClaw;
-import frc.robot.commands.Hatch.ToggleHatchExtender;
 import frc.robot.commands.Intake.IntakeOut;
 import frc.robot.commands.Intake.PoweredIntakeIn;
+import frc.robot.commands.Lift.PIDLift;
+import frc.robot.commands.Lift.TogglePIDEnabled;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
       UsbCamera wristCamera = 
       CameraServer.getInstance().startAutomaticCapture(RobotMap.Sensors.CAMERA_WRIST);
       wristCamera.setFPS(20);
+      //wristCamera.setExposureManual(60);
       wristCamera.setResolution(260, 195);
 
       //wristCamera.setVideoMode(PixelFormat.kBGR, 260, 195, 20);
@@ -87,8 +88,13 @@ public class Robot extends TimedRobot {
 
   private void postDashboardValues() {
     
+    SmartDashboard.putNumber("lift encoder is ", lift.getEncoder());
+
     SmartDashboard.putBoolean("compresssor pressurized", compressor.getPressureSwitchValue());
-    SmartDashboard.putString("lift is ", lift.bottomedOut() ? "bottomed out" : lift.toppedOut() ? "topped" : "in middle");
+    SmartDashboard.putBoolean("Lift PID enabled ", lift.getPIDenabled());
+
+    SmartDashboard.putBoolean("front jack", drive.getFrontJackState());
+    SmartDashboard.putBoolean("back jack", drive.getBackJackState());
     
     String intakeText = "";
     switch(intake.intakeState) {
@@ -98,25 +104,24 @@ public class Robot extends TimedRobot {
       break;
       case STOPPED: intakeText = "stopped"; 
     }
+
     SmartDashboard.putString("intake is ", intakeText);
-    //SmartDashboard.putData();
   }
 
   private void bindButtons() {
     
-    OI.logitechF310.a.whenPressed(new ToggleHatchClaw());
-    OI.logitechF310.b.whenPressed(new ToggleHatchExtender());
-
     OI.logitechF310.x.whenPressed(new ToggleFrontJack());
     OI.logitechF310.y.whenPressed(new ToggleBackJack());
-
-    //OI.joystick.start.whenPressed(new CalibrateLift());
-    //OI.joystick.back.whenPressed(new DepositHatch());
 
     OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
     OI.logitechF310.righJoystickButton.whileHeld(new PoweredIntakeIn());
     
-    //OI.logitechF310.rightJoystickButton.whenReleased(new TimedWristDown()); // take this out if you dont want wrist to go down after releasing joystick button
+    OI.logitechF310.back.whenPressed(new TogglePIDEnabled());
+    
+    OI.logitechF310.a.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.GROUND));
+    OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.SHIP_LV2));
+    // OI.logitechF310.start.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.SHIP_LV3));
+    
   }
   
   @Override
@@ -132,9 +137,6 @@ public class Robot extends TimedRobot {
     
     updateLED();
     postDashboardValues();
-
-    System.out.println("encoder @: " + lift.getEncoder());
-
     Scheduler.getInstance().run();
   }
 
@@ -151,6 +153,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     commonInit();
+    lift.zeroOutEncoder();
   }
 
   @Override

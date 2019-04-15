@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -53,7 +52,7 @@ public class Hatch extends Subsystem {
   }
 
   private void setHatchExtentionSol(boolean state) {
-    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+    //DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
 //    extender.set(val);
     extenderState = state;
   }

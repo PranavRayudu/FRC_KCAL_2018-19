@@ -49,6 +49,9 @@ public class Drive extends Subsystem {
       RobotMap.Pneumatics.BACK_JACK_FORWARD, 
       RobotMap.Pneumatics.BACK_JACK_REVERSE
     );
+
+    //setFrontJack(true);
+    //setBackJack(true);
   }
 
   public void setRaw(double leftVal, double rightVal) {
@@ -61,6 +64,14 @@ public class Drive extends Subsystem {
     if(!RobotMap.Config.ENABLE_MOTORS) return;
 
     drive.arcadeDrive(xSpeed, zRotation);
+  }
+
+  public boolean getBackJackState() {
+    return backJackState;
+  }
+
+  public boolean getFrontJackState() {
+    return frontJackState;
   }
 
   private void setFrontJack(boolean state) {

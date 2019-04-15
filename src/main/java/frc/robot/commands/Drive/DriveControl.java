@@ -8,10 +8,8 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class DriveControl extends Command {
   public DriveControl() {

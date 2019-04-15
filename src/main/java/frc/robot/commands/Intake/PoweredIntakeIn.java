@@ -7,13 +7,9 @@
 
 package frc.robot.commands.Intake;
 
-import com.sun.javadoc.RootDoc;
-
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.Intake.IntakeState;
 
 public class PoweredIntakeIn extends Command {
 

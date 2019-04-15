@@ -20,16 +20,24 @@ public class RobotMap {
     
     public static final double WRIST_PWR        =-0.50f;
     public static final double WRIST_AUTO_PWR   = 0.20f;
-    public static final double WRIST_DEAD_PWR   =-0.05f; // not used
+    public static final double WRIST_DEAD_PWR   =-0.10f;
 
     public static final double DRIVE_HIGH       = 0.80f;
     public static final double DRIVE_LOW        = 0.50f;
     
     public class kLiftGains {
-      public static final double kF = 0.0;
-      public static final double kP = 1.0;
-      public static final double kI = 1.0;
-      public static final double kD = 1.0;
+      //public static final double kF = 0.0;
+      public static final double kP = 0.30f;
+      public static final double kI = 1.00f;
+      public static final double kD = 1.00f;
+      public static final double kTolerance = 10000.0;
+
+      public class setpoints {
+        public static final double GROUND = 0.0;
+        public static final double CARGO = 0.0;
+        public static final double SHIP_LV2 = -890000;
+        public static final double SHIP_LV3 = -1550000;
+      }
     }
   }
 

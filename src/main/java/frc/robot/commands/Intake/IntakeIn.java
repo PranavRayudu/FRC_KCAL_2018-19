@@ -8,7 +8,6 @@
 package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Intake.IntakeState;
@@ -22,6 +21,7 @@ public class IntakeIn extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.intake.intakeState = IntakeState.IN;
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -50,8 +50,6 @@ public class Robot extends TimedRobot {
       //wristCamera.setExposureManual(60);
       wristCamera.setResolution(260, 195);
 
-      //wristCamera.setVideoMode(PixelFormat.kBGR, 260, 195, 20);
-      
     } catch (Exception e) {
       System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_WRIST);
     }

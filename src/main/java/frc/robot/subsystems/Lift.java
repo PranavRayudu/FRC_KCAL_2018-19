@@ -50,17 +50,6 @@ public class Lift extends Subsystem {
 
     double in = val;
 
-    // if(topLimit.get()) {
-    //   in = Math.max(in, 0);
-    //   OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
-    // }
-
-    // if(bottomLimit.get()) {
-    //   in = Math.min(in, 0);
-    //   zeroOutEncoder();
-    //   OI.logitechF310.setRumble(RumbleType.kLeftRumble, 1.0);
-    // }
-
     rightLiftPWM.set(ControlMode.PercentOutput, -in);
     leftLiftPWM.set(ControlMode.PercentOutput, in);
   }

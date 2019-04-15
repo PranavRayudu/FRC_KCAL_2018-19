@@ -89,7 +89,7 @@ public class RobotMap {
     public static final int LEFT_TRIGGER = 2;
     public static final int RIGHT_TRIGGER = 3;
 
-    public static final int DPAD = 0;
+    //public static final int DPAD = 0;
     
     public static final int BTN_A = 1;
     public static final int BTN_B = 2;
@@ -104,26 +104,32 @@ public class RobotMap {
   }
 
   public class FlightJoystick {
-
+    public static final int X_AXIS = 0;
+    public static final int Y_AXIS = 1;
+    public static final int Z_AXIS = 2;
+    public static final int SLIDER_AXIS = 3;
   }
 
   public class ButtonBoard {
-    public static final int TURBO = 0;
-    public static final int MACRO = 0;
-    public static final int HOME = 0;
-    public static final int SHARE = 0;
-    public static final int OPTIONS = 0;
 
-    public static final int LB = 0;
-    public static final int LT = 0;
-    public static final int RB = 0;
-    public static final int RT = 0;
-    public static final int SL = 0;
-    public static final int SR = 0;
+    public static final int LEFT_Y_AXIS = 0;
+    public static final int LEFT_X_AXIS = 1;
+    
+    public static final int LEFT_TRIGGER = 2;
+    public static final int RIGHT_TRIGGER = 3;
 
-    public static final int X = 0;
-    public static final int Y = 0;
-    public static final int A = 0;
-    public static final int B = 0;
+    public static final int BTN_A = 1;
+    public static final int BTN_B = 2;
+    public static final int BTN_X = 3;
+    public static final int BTN_Y = 4;  
+    
+    public static final int BTN_LB = 5;
+    public static final int BTN_RB = 6;
+
+    public static final int BTN_SHARE = 7;
+    public static final int BTN_OPTIONS = 8;
+
+    public static final int BTN_SL = 9;
+    public static final int BTN_SR = 10;
   }
 }

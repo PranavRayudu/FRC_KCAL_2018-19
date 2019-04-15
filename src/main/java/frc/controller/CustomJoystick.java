@@ -9,6 +9,7 @@ package frc.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -45,18 +46,18 @@ public class CustomJoystick extends Joystick {
     }
 
     public double xAxis() {
-        return applyThreshold(getRawAxis(0));
+        return applyThreshold(getRawAxis(RobotMap.FlightJoystick.X_AXIS));
     }
 
     public double yAxis() {
-        return applyThreshold(getRawAxis(1));
+        return applyThreshold(getRawAxis(RobotMap.FlightJoystick.Y_AXIS));
     }
 
     public double zAxis() {
-        return applyThreshold(getRawAxis(2));
+        return applyThreshold(getRawAxis(RobotMap.FlightJoystick.Z_AXIS));
     }
 
     public double slider() {
-        return applyThreshold(getRawAxis(3));
+        return applyThreshold(getRawAxis(RobotMap.FlightJoystick.SLIDER_AXIS));
     }
 }

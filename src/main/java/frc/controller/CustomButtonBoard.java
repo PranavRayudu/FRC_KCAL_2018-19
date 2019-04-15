@@ -16,9 +16,10 @@ import frc.robot.RobotMap;
  */
 public class CustomButtonBoard extends Joystick {
 
-    JoystickButton turbo, macro, home, share, options;
-    JoystickButton lb, lt, rb, rt;
-    JoystickButton sl, sr;
+    JoystickButton share, options;
+    JoystickButton lb, rb;
+    //JoystickButton sl, sr;
+    JoystickButton sr;
     JoystickButton x, y, a, b;
 
     CustomDPad dpad;
@@ -26,22 +27,38 @@ public class CustomButtonBoard extends Joystick {
     public CustomButtonBoard(int port) {
         super(port);
 
-        turbo = new JoystickButton(this, RobotMap.ButtonBoard.TURBO);
-        macro = new JoystickButton(this, RobotMap.ButtonBoard.MACRO);
-        home = new JoystickButton(this, RobotMap.ButtonBoard.HOME);
-        share = new JoystickButton(this, RobotMap.ButtonBoard.SHARE);
-        options = new JoystickButton(this, RobotMap.ButtonBoard.OPTIONS);
+        share = new JoystickButton(this, RobotMap.ButtonBoard.BTN_SHARE);
+        options = new JoystickButton(this, RobotMap.ButtonBoard.BTN_OPTIONS);
 
-        lb = new JoystickButton(this, RobotMap.ButtonBoard.LB);
-        lt = new JoystickButton(this, RobotMap.ButtonBoard.LT);
-        rb = new JoystickButton(this, RobotMap.ButtonBoard.RB);
-        rt = new JoystickButton(this, RobotMap.ButtonBoard.RT);
+        lb = new JoystickButton(this, RobotMap.ButtonBoard.BTN_LB);
+        //lt = new JoystickButton(this, RobotMap.ButtonBoard.BTN_LT);
+        rb = new JoystickButton(this, RobotMap.ButtonBoard.BTN_RB);
+        //rt = new JoystickButton(this, RobotMap.ButtonBoard.BTN_RT);
         
-        x = new JoystickButton(this, RobotMap.ButtonBoard.X);
-        y = new JoystickButton(this, RobotMap.ButtonBoard.Y);
-        a = new JoystickButton(this, RobotMap.ButtonBoard.A);
-        b = new JoystickButton(this, RobotMap.ButtonBoard.B);
+        //sl = new JoystickButton(this, RobotMap.ButtonBoard.BTN_SL); // this is the macro key
+        sr = new JoystickButton(this, RobotMap.ButtonBoard.BTN_SR); // this is the macro key
+
+        x = new JoystickButton(this, RobotMap.ButtonBoard.BTN_X);
+        y = new JoystickButton(this, RobotMap.ButtonBoard.BTN_Y);
+        a = new JoystickButton(this, RobotMap.ButtonBoard.BTN_A);
+        b = new JoystickButton(this, RobotMap.ButtonBoard.BTN_B);
         
         dpad = new CustomDPad(this);
+    }
+
+    public double xAxis() {
+        return this.getRawAxis(RobotMap.ButtonBoard.LEFT_X_AXIS);
+    }
+
+    public double yAxis() {
+        return this.getRawAxis(RobotMap.ButtonBoard.LEFT_Y_AXIS);
+    }
+
+    public double leftTrigger() {
+        return this.getRawAxis(RobotMap.ButtonBoard.LEFT_TRIGGER);
+    }
+
+    public double rightTrigger() {
+        return this.getRawAxis(RobotMap.ButtonBoard.RIGHT_TRIGGER);
     }
 }

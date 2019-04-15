@@ -42,9 +42,9 @@ public class Hatch extends Subsystem {
   }
 
   private void setClawSol(boolean state) {
-    DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
-//    claw.set(val);
-    clawState = state;
+//     DoubleSolenoid.Value val = state ? Value.kForward : Value.kReverse;
+// //    claw.set(val);
+//     clawState = state;
   }
   
   public void toggleClawSol() {

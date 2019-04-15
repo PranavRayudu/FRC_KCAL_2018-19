@@ -42,8 +42,9 @@ public class Intake extends Subsystem {
       case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
       case OUT: setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
       case STOPPED: setIntakePwr(0.0f);
-      default: intakeState = state;
     }
+
+    intakeState = state;
   }
 
   @Override

@@ -42,7 +42,7 @@ public class PIDLift extends Command {
     
     this.integral += (error*.02f); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
     double derivative = (error - this.previous_error) / .02f;
-    double output = P*error;// + I*this.integral + D*derivative;
+    double output = P*error + I*this.integral + D*derivative;
     
     this.previous_error = error;
 

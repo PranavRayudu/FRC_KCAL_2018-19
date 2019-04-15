@@ -27,8 +27,6 @@ public class Lift extends Subsystem {
 
   private boolean enablePID = true;
 
-  private int heightState = 0;
-
   public Lift() {
 
     topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
@@ -41,7 +39,10 @@ public class Lift extends Subsystem {
     leftLiftPWM.setNeutralMode(NeutralMode.Brake);
     
     rightLiftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    rightLiftPWM.setSensorPhase(false);
+    
+    //rightLiftPWM.setSensorPhase(true); TODO: check this once reaching comepetition
+    //rightLiftPWM.setInverted(true);
+    
     zeroOutEncoder();
   }
 

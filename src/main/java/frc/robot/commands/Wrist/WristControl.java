@@ -28,7 +28,7 @@ public class WristControl extends Command {
   @Override
   protected void execute() {
 
-    Robot.wrist.setPwr((OI.Axes.wristAxis() * RobotMap.Constants.WRIST_PWR) 
+    Robot.wrist.setPwr((OI.Axes.wristAxis() * RobotMap.Constants.WRIST_CTRL_PWR) 
                       + RobotMap.Constants.WRIST_DEAD_PWR);
   }
 

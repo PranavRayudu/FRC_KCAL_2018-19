@@ -15,12 +15,13 @@ public class RobotMap {
   }
 
   public class Constants {
+    public static final double INTAKE_DEAD_PWR  = 0.15f;
     public static final double INTAKE_IN_PWR    = 0.50f;
     public static final double INTAKE_OUT_PWR   =-0.90f;
     
-    public static final double WRIST_PWR        =-0.50f;
+    public static final double WRIST_CTRL_PWR   =-0.50f;
     public static final double WRIST_AUTO_PWR   = 0.20f;
-    public static final double WRIST_DEAD_PWR   =-0.10f;
+    public static final double WRIST_DEAD_PWR   =-0.08f;
 
     public static final double DRIVE_HIGH       = 0.80f;
     public static final double DRIVE_LOW        = 0.50f;
@@ -28,15 +29,16 @@ public class RobotMap {
     public class kLiftGains {
       //public static final double kF = 0.0;
       public static final double kP = 0.30f;
-      public static final double kI = 1.00f;
-      public static final double kD = 1.00f;
-      public static final double kTolerance = 10000.0;
+      public static final double kI = 0.00f;
+      public static final double kD = 0.00f;
+      public static final double tolerance = 10000.0;
+      public static final double highLimit = 900000.0;
 
       public class setpoints {
         public static final double GROUND = 0.0;
-        public static final double CARGO = 0.0;
-        public static final double SHIP_LV2 = -890000;
-        public static final double SHIP_LV3 = -1550000;
+        public static final double CARGO = 334028.0;
+        public static final double SHIP_LV2 = 890000;
+        public static final double SHIP_LV3 = 1550000;
       }
     }
   }
@@ -46,8 +48,7 @@ public class RobotMap {
     public static final int CAMERA_WRIST = 0;
     public static final int CAMERA_LIFT = 1;
 
-    public static final int LIFT_SWTICH_UP = 1;
-    public static final int LIFT_SWTICH_DOWN = 0;
+    public static final int LIFT_SWTICH_BOTTOM = 0;
 
     public static final int LED_STRIP = 2;
   }
@@ -89,8 +90,6 @@ public class RobotMap {
     public static final int LEFT_TRIGGER = 2;
     public static final int RIGHT_TRIGGER = 3;
 
-    //public static final int DPAD = 0;
-    
     public static final int BTN_A = 1;
     public static final int BTN_B = 2;
     public static final int BTN_X = 3;

@@ -19,30 +19,31 @@ import frc.robot.commands.Lift.LiftControl;
 
 public class Lift extends Subsystem {
   
-  private DigitalInput topLimit;
-  private DigitalInput bottomLimit;
-  
   private TalonSRX rightLiftPWM;
   private TalonSRX leftLiftPWM;
 
+  private DigitalInput bottomSwitch;
+
+  private boolean reverse = true;
   private boolean enablePID = true;
 
   public Lift() {
 
-    topLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_UP);
-    bottomLimit = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_DOWN);
+    bottomSwitch = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_BOTTOM);
 
     rightLiftPWM = new TalonSRX(RobotMap.Motors.RIGHT_LIFT);
     leftLiftPWM = new TalonSRX(RobotMap.Motors.LEFT_LIFT);
 
     rightLiftPWM.setNeutralMode(NeutralMode.Brake);
     leftLiftPWM.setNeutralMode(NeutralMode.Brake);
-    
+
     rightLiftPWM.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
     
-    //rightLiftPWM.setSensorPhase(true); TODO: check this once reaching comepetition
-    //rightLiftPWM.setInverted(true);
+    rightLiftPWM.setSensorPhase(!reverse);
     
+    rightLiftPWM.setInverted(reverse);
+    leftLiftPWM.setInverted(reverse);
+
     zeroOutEncoder();
   }
 
@@ -51,34 +52,32 @@ public class Lift extends Subsystem {
 
     double in = val;
 
+    // if(bottomedOut()) {
+    //   in = Math.max(0, in);
+    // }
+
+    // if(getEncoderRaw() > RobotMap.Constants.kLiftGains.highLimit) {
+    //   in = Math.min(0, in);
+    // }
+
     rightLiftPWM.set(ControlMode.PercentOutput, -in);
     leftLiftPWM.set(ControlMode.PercentOutput, in);
   }
-
-  // public void setLiftLevel(int lv) {
-  //   switch(lv) {
-  //     case 0: 
-  //   }
-  // }
-
-  // public void usePID() {
-
-  // }
 
   public void zeroOutEncoder() {
     rightLiftPWM.setSelectedSensorPosition(0);
   }
 
-  public double getEncoder() {
+  public double getEncoderRaw() {
     return rightLiftPWM.getSelectedSensorPosition();
   }
 
-  public boolean bottomedOut() {
-    return bottomLimit.get();
+  public double getEncoderScaled() { // on a scale of 0 - 100
+    return (rightLiftPWM.getSelectedSensorPosition() / RobotMap.Constants.kLiftGains.highLimit) * 100.0;
   }
-  
-  public boolean toppedOut() {
-    return topLimit.get();
+
+  public boolean bottomedOut() {
+    return bottomSwitch.get();
   }
 
   public void setPIDEnabled(boolean state) {

@@ -40,7 +40,7 @@ public class IntakeIn extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
+    Robot.intake.intakeDeadSpeed = RobotMap.Constants.INTAKE_DEAD_PWR;
   }
 
   // Called when another command which requires one or more of the same

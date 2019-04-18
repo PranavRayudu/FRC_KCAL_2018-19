@@ -18,7 +18,7 @@ import frc.robot.RobotMap;
 public class CustomGamepad extends Joystick {
 
     private static final double joystickThreshold = 0.05;
-    private static final double triggerThreshold = 0.5;
+    private static final double triggerThreshold = 0.1;
 
     public JoystickButton a, b, x, y;
     public JoystickButton lb, rb;

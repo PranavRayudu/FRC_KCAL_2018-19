@@ -29,7 +29,7 @@ public class PIDLift extends Command {
     this.P = RobotMap.Constants.kLiftGains.kP;
     this.I = RobotMap.Constants.kLiftGains.kI;
     this.D = RobotMap.Constants.kLiftGains.kD;
-    this.tolerance = RobotMap.Constants.kLiftGains.kTolerance;
+    this.tolerance = RobotMap.Constants.kLiftGains.tolerance;
 
     //this.previous_error = setpoint - Robot.lift.getEncoder(); // Error = Target - Actual
   }
@@ -38,7 +38,7 @@ public class PIDLift extends Command {
   @Override
   protected void execute() {
     
-    this.error = setpoint - Robot.lift.getEncoder(); // Error = Target - Actual
+    this.error = setpoint - Robot.lift.getEncoderRaw(); // Error = Target - Actual
     
     this.integral += (error*.02f); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
     double derivative = (error - this.previous_error) / .02f;
@@ -56,7 +56,7 @@ public class PIDLift extends Command {
     if(!Robot.lift.getPIDenabled()) {
       System.out.println("PID command stopped because PID is disabled");
       return true;
-    } else if(Math.abs(setpoint - Robot.lift.getEncoder()) < tolerance) {
+    } else if(Math.abs(setpoint - Robot.lift.getEncoderRaw()) < tolerance) {
       System.out.println("PID command stopped because of tolerance threshold");
       return true;
     } else {

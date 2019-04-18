@@ -9,6 +9,7 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Intake.IntakeState;
 
 public class IntakeStop extends Command {
@@ -26,7 +27,10 @@ public class IntakeStop extends Command {
   @Override
   protected void execute() {
     // Robot.intake.setIntakePwr(IntakeState.STOPPED);
-    Robot.intake.setIntakePwr(0.0);
+    //Robot.intake.setIntakePwr(Robot.intake.intakeDeadSpeed);
+    
+    Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_DEAD_PWR);
+    //Robot.intake.setIntakePwr(0.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

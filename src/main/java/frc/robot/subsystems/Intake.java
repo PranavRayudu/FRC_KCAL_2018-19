@@ -23,11 +23,13 @@ public class Intake extends Subsystem {
   private Talon intake;  
   public IntakeState intakeState;
 
+  public double intakeDeadSpeed;
 
   public Intake() {
     intake = new Talon(RobotMap.Motors.INTAKE);
     intake.setSafetyEnabled(true);
     intakeState = IntakeState.STOPPED;
+    intakeDeadSpeed = 0.0;
   }
 
   // intake controls
@@ -36,16 +38,16 @@ public class Intake extends Subsystem {
     intake.set(val);
   }
 
-  // NOTE: do not use - too slow
-  public void setIntakePwr(IntakeState state) {
-    switch(state) {
-      case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
-      case OUT: setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
-      case STOPPED: setIntakePwr(0.0f);
-    }
+  // NOTE: do not use - slow refresh rate
+  // public void setIntakePwr(IntakeState state) {
+  //   switch(state) {
+  //     case IN: setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
+  //     case OUT: setIntakePwr(RobotMap.Constants.INTAKE_OUT_PWR);
+  //     case STOPPED: setIntakePwr(0.0f);
+  //   }
 
-    intakeState = state;
-  }
+  //   intakeState = state;
+  // }
 
   @Override
   public void initDefaultCommand() {

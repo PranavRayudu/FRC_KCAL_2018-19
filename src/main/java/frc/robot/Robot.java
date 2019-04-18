@@ -12,9 +12,11 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Drive.ToggleBackJack;
 import frc.robot.commands.Drive.ToggleFrontJack;
@@ -86,14 +88,19 @@ public class Robot extends TimedRobot {
 
   private void postDashboardValues() {
     
-    SmartDashboard.putNumber("lift encoder is ", lift.getEncoder());
+    SmartDashboard.putNumber("raw lift encoder value", lift.getEncoderRaw());
+    SmartDashboard.putNumber("scaled lift encoder value", lift.getEncoderScaled());
 
+    //Preferences.getInstance()
+    
     SmartDashboard.putBoolean("compresssor pressurized", compressor.getPressureSwitchValue());
     SmartDashboard.putBoolean("Lift PID enabled ", lift.getPIDenabled());
 
+    SmartDashboard.putBoolean("Lift Bottomed Out", lift.bottomedOut());
+
     SmartDashboard.putBoolean("front jack", drive.getFrontJackState());
     SmartDashboard.putBoolean("back jack", drive.getBackJackState());
-    
+
     String intakeText = "";
     switch(intake.intakeState) {
       case IN: intakeText = "taking in";
@@ -117,7 +124,7 @@ public class Robot extends TimedRobot {
     OI.logitechF310.back.whenPressed(new TogglePIDEnabled());
     
     OI.logitechF310.a.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.GROUND));
-    OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.SHIP_LV2));
+    OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.CARGO));
     // OI.logitechF310.start.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.SHIP_LV3));
     
   }

@@ -10,6 +10,7 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveControl extends Command {
   public DriveControl() {
@@ -25,9 +26,11 @@ public class DriveControl extends Command {
   @Override
   protected void execute() {
   
-    // Single Joystick control
-    double forwardVal = OI.Axes.driveForwardAxis();
-    double rotVal = OI.Axes.driveRotAxis();
+    double forwardVal = OI.Axes.driveVerticalHighAxis() * RobotMap.Constants.DRIVE_HIGH
+                      + OI.Axes.driveVerticalLowAxis() * RobotMap.Constants.DRIVE_LOW;
+                      
+    double rotVal = OI.Axes.driveHorizontalHighAxis() * RobotMap.Constants.DRIVE_HIGH
+                  + OI.Axes.driveHorizontalLowAxis() * RobotMap.Constants.DRIVE_LOW;
 
     Robot.drive.setArcade(forwardVal, rotVal);
   }

@@ -17,7 +17,7 @@ import frc.controller.CustomJoystick;
 public class OI {
 
   public static CustomGamepad logitechF310;
-  public static CustomJoystick flightController;
+  //public static CustomJoystick flightController;
   
   public static void init() {
     logitechF310 = new CustomGamepad(0);
@@ -25,29 +25,44 @@ public class OI {
   }
 
   public static class Axes {
-    public static double driveForwardAxis() {
-    return - OI.logitechF310.leftStickY() * RobotMap.Constants.DRIVE_HIGH
-           - OI.logitechF310.rightStickY() * RobotMap.Constants.DRIVE_LOW
-           + OI.logitechF310.dpad.vertical() * RobotMap.Constants.DRIVE_LOW;
+
+    public static double driveVerticalLowAxis() {
+    return - OI.logitechF310.rightStickY()
+           + OI.logitechF310.dpad.vertical();
     }
 
-    public static double driveRotAxis() {
-      return  OI.logitechF310.leftStickX() * RobotMap.Constants.DRIVE_HIGH
-            + OI.logitechF310.rightStickX() * RobotMap.Constants.DRIVE_LOW
-            + OI.logitechF310.dpad.horizontal() * RobotMap.Constants.DRIVE_LOW;
+    public static double driveVerticalHighAxis() {
+      return - OI.logitechF310.leftStickY();
+    }
+
+    public static double driveHorizontalLowAxis() {
+      return OI.logitechF310.rightStickX()
+           + OI.logitechF310.dpad.horizontal();
+    }
+
+    public static double driveHorizontalHighAxis() {
+      return  OI.logitechF310.leftStickX();
     }
 
     public static double liftAxis() {
-      return OI.logitechF310.lb.get() ? 1:0
-           - OI.logitechF310.leftTrigger();
+      
+      double pwr = 0.0;
+
+      pwr += OI.logitechF310.leftTrigger();
+      
+      pwr -= OI.logitechF310.lb.get() ? 1.0 : 0.0;
+      
+      return pwr;
     }
 
     public static double wristAxis() {
+      
       double pwr = 0.0;
+
       pwr += OI.logitechF310.rightTrigger();
       
-      if(OI.logitechF310.rb.get())
-        pwr -= 1.0;
+      pwr -= OI.logitechF310.rb.get() ? 1.0 : 0.0;
+      
       return pwr;
     }
   }

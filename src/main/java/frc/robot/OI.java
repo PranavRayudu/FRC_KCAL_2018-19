@@ -8,7 +8,13 @@
 package frc.robot;
 
 import frc.controller.CustomGamepad;
-import frc.controller.CustomJoystick;
+import frc.robot.commands.Drive.ToggleBackJack;
+import frc.robot.commands.Drive.ToggleFrontJack;
+import frc.robot.commands.Intake.IntakeOut;
+import frc.robot.commands.Intake.PoweredIntakeIn;
+import frc.robot.commands.Lift.PIDLift;
+import frc.robot.commands.Lift.TogglePIDEnabled;
+import frc.robot.commands.Wrist.ToggleHatchMode;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,6 +28,19 @@ public class OI {
   public static void init() {
     logitechF310 = new CustomGamepad(0);
     //flightController = new CustomJoystick(1);
+
+    
+    OI.logitechF310.x.whenPressed(new ToggleFrontJack());
+    OI.logitechF310.y.whenPressed(new ToggleBackJack());
+
+    OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
+    OI.logitechF310.righJoystickButton.whileHeld(new PoweredIntakeIn());
+
+    OI.logitechF310.back.whenPressed(new TogglePIDEnabled());
+    OI.logitechF310.start.whenPressed(new ToggleHatchMode());
+    
+    OI.logitechF310.a.whenPressed(new PIDLift(RobotMap.Constants.Lift.setpoints.GROUND));
+    //OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.CARGO));
   }
 
   public static class Axes {

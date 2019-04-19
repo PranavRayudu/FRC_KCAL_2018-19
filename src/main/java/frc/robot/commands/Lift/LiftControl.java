@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class LiftControl extends Command {
 
@@ -26,7 +27,7 @@ public class LiftControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.lift.setPwr(OI.Axes.liftAxis());
+    Robot.lift.setPwr(OI.Axes.liftAxis() * RobotMap.Constants.Lift.CTRL_PWR + RobotMap.Constants.Lift.kPID.kF);
   }
 
   // Make this return true when this Command no longer needs to run execute()

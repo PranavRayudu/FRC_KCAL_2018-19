@@ -12,10 +12,12 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class PIDLift extends Command {
-  double P, I, D = 1;
-  double tolerance, setpoint;
+  private double P, I, D, F;
+  private double tolerance, setpoint;
 
-  double integral, error, previous_error;
+  private double integral, error, previous_error;
+  
+  private static double timeStep = 0.02f;
 
   public PIDLift(double setpoint) {
     requires(Robot.lift);
@@ -26,12 +28,11 @@ public class PIDLift extends Command {
   @Override
   protected void initialize() {
     
-    this.P = RobotMap.Constants.kLiftGains.kP;
-    this.I = RobotMap.Constants.kLiftGains.kI;
-    this.D = RobotMap.Constants.kLiftGains.kD;
-    this.tolerance = RobotMap.Constants.kLiftGains.tolerance;
-
-    //this.previous_error = setpoint - Robot.lift.getEncoder(); // Error = Target - Actual
+    this.P = RobotMap.Constants.Lift.kPID.kP;
+    this.I = RobotMap.Constants.Lift.kPID.kI;
+    this.D = RobotMap.Constants.Lift.kPID.kD;
+    this.F = RobotMap.Constants.Lift.kPID.kF;
+    this.tolerance = RobotMap.Constants.Lift.tolerance;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -40,9 +41,10 @@ public class PIDLift extends Command {
     
     this.error = setpoint - Robot.lift.getEncoderRaw(); // Error = Target - Actual
     
-    this.integral += (error*.02f); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
-    double derivative = (error - this.previous_error) / .02f;
-    double output = P*error + I*this.integral + D*derivative;
+    this.integral += (this.error * timeStep); // increase by area under curve (dist * time)
+    double derivative = (this.error - this.previous_error) / timeStep; // velocity
+
+    double output = (this.P * this.error) + (this.I * this.integral) + (this.D * derivative) + this.F;
     
     this.previous_error = error;
 
@@ -62,9 +64,6 @@ public class PIDLift extends Command {
     } else {
       return false;
     }
-
-    // System.out.println("PID command has stopped at " + System.currentTimeMillis());
-    // return !Robot.lift.getPIDenabled() || Math.abs(setpoint - error) < tolerance;
   }
 
   // Called once after isFinished returns true

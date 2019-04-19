@@ -17,10 +17,15 @@ import frc.robot.commands.Wrist.WristControl;
  */
 public class Wrist extends Subsystem {
 
-  Talon wristPWM;
+  private Talon wristPWM;
+  private boolean reverse;
 
   public Wrist() {
     wristPWM = new Talon(RobotMap.Motors.WRIST);
+
+    reverse = RobotMap.Config.WRIST_REVERSED;
+
+    wristPWM.setInverted(reverse);
     wristPWM.setSafetyEnabled(true);
   }
 

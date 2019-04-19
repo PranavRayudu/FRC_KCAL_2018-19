@@ -28,8 +28,9 @@ public class WristControl extends Command {
   @Override
   protected void execute() {
 
-    Robot.wrist.setPwr((OI.Axes.wristAxis() * RobotMap.Constants.WRIST_CTRL_PWR) 
-                      + RobotMap.Constants.WRIST_DEAD_PWR);
+    double deadPwr = Robot.intake.getHatchMode() ? RobotMap.Constants.Wrist.DEAD_HATCH_PWR : RobotMap.Constants.Wrist.DEAD_CARGO_PWR;
+
+    Robot.wrist.setPwr((OI.Axes.wristAxis() * RobotMap.Constants.Wrist.CTRL_PWR) + deadPwr);
   }
 
   // Make this return true when this Command no longer needs to run execute()

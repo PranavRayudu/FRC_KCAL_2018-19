@@ -27,9 +27,10 @@ public class IntakeStop extends Command {
   @Override
   protected void execute() {
     // Robot.intake.setIntakePwr(IntakeState.STOPPED);
-    //Robot.intake.setIntakePwr(Robot.intake.intakeDeadSpeed);
     
-    Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_DEAD_PWR);
+      Robot.intake.setIntakePwr(RobotMap.Constants.Intake.DEAD_PWR);
+    //}
+    //Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_DEAD_PWR);
     //Robot.intake.setIntakePwr(0.0);
   }
 

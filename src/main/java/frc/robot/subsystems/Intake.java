@@ -21,15 +21,13 @@ public class Intake extends Subsystem {
   public enum IntakeState {IN, OUT, STOPPED};
   
   private Talon intake;  
-  public IntakeState intakeState;
-
-  public double intakeDeadSpeed;
+  public IntakeState intakeState; // TODO: refactor this variable into private
+  private boolean hatchMode = false;
 
   public Intake() {
     intake = new Talon(RobotMap.Motors.INTAKE);
     intake.setSafetyEnabled(true);
     intakeState = IntakeState.STOPPED;
-    intakeDeadSpeed = 0.0;
   }
 
   // intake controls
@@ -48,6 +46,18 @@ public class Intake extends Subsystem {
 
   //   intakeState = state;
   // }
+
+    private void setHatchMode(boolean hatchMode) {
+      this.hatchMode = hatchMode;
+    }
+
+    public void toggleHatchMode() {
+      setHatchMode(!hatchMode);
+    }
+
+    public boolean getHatchMode() {
+      return hatchMode;
+    }
 
   @Override
   public void initDefaultCommand() {

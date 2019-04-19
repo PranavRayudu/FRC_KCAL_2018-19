@@ -5,15 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Hatch;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 import frc.robot.Robot;
 
-public class ToggleHatchClaw extends Command {
-  public ToggleHatchClaw() {
-    requires(Robot.hatch);
+public class ToggleHatchMode extends Command {
+  public ToggleHatchMode() {
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
@@ -24,7 +23,7 @@ public class ToggleHatchClaw extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.toggleClawSol();
+    Robot.intake.toggleHatchMode();
   }
 
   // Make this return true when this Command no longer needs to run execute()

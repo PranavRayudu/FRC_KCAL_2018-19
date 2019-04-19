@@ -22,17 +22,20 @@ public class Lift extends Subsystem {
   private TalonSRX rightLiftPWM;
   private TalonSRX leftLiftPWM;
 
-  private DigitalInput bottomSwitch;
+  //private DigitalInput bottomSwitch;
 
-  private boolean reverse = true;
-  private boolean enablePID = true;
+  private boolean reverse;
+  private boolean enablePID;
 
   public Lift() {
 
-    bottomSwitch = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_BOTTOM);
+    //bottomSwitch = new DigitalInput(RobotMap.Sensors.LIFT_SWTICH_BOTTOM);
 
     rightLiftPWM = new TalonSRX(RobotMap.Motors.RIGHT_LIFT);
     leftLiftPWM = new TalonSRX(RobotMap.Motors.LEFT_LIFT);
+    
+    enablePID = RobotMap.Config.LIFT_PID_ENABLED;
+    reverse = RobotMap.Config.LIFT_REVERSED;
 
     rightLiftPWM.setNeutralMode(NeutralMode.Brake);
     leftLiftPWM.setNeutralMode(NeutralMode.Brake);
@@ -56,9 +59,9 @@ public class Lift extends Subsystem {
     //   in = Math.max(0, in);
     // }
 
-    // if(getEncoderRaw() > RobotMap.Constants.kLiftGains.highLimit) {
-    //   in = Math.min(0, in);
-    // }
+    if(getEncoderRaw() > RobotMap.Constants.Lift.highLimit) {
+      in = Math.min(0, in);
+    }
 
     rightLiftPWM.set(ControlMode.PercentOutput, -in);
     leftLiftPWM.set(ControlMode.PercentOutput, in);
@@ -72,13 +75,9 @@ public class Lift extends Subsystem {
     return rightLiftPWM.getSelectedSensorPosition();
   }
 
-  public double getEncoderScaled() { // on a scale of 0 - 100
-    return (rightLiftPWM.getSelectedSensorPosition() / RobotMap.Constants.kLiftGains.highLimit) * 100.0;
-  }
-
-  public boolean bottomedOut() {
-    return bottomSwitch.get();
-  }
+  // public boolean bottomedOut() {
+  //   return bottomSwitch.get();
+  // }
 
   public void setPIDEnabled(boolean state) {
     this.enablePID = state;

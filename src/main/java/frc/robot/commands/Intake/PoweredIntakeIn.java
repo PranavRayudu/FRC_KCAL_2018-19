@@ -27,8 +27,8 @@ public class PoweredIntakeIn extends Command {
   @Override
   protected void execute() {
     //Robot.intake.setIntakePwr(IntakeState.IN);
-    Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
-    Robot.wrist.setPwr(RobotMap.Constants.WRIST_AUTO_PWR);
+    Robot.intake.setIntakePwr(RobotMap.Constants.Intake.IN_PWR);
+    Robot.wrist.setPwr(RobotMap.Constants.Wrist.INTAKE_PWR);
   }
 
   // Make this return true when this Command no longer needs to run execute()

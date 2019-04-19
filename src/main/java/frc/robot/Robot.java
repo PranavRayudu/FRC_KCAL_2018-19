@@ -12,20 +12,11 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Drive.ToggleBackJack;
-import frc.robot.commands.Drive.ToggleFrontJack;
-import frc.robot.commands.Intake.IntakeOut;
-import frc.robot.commands.Intake.PoweredIntakeIn;
-import frc.robot.commands.Lift.PIDLift;
-import frc.robot.commands.Lift.TogglePIDEnabled;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Wrist;
@@ -36,7 +27,6 @@ public class Robot extends TimedRobot {
   public static Lift lift;
   public static Wrist wrist;
   public static Intake intake;
-  public static Hatch hatch;
 
   private Compressor compressor;
 
@@ -66,20 +56,17 @@ public class Robot extends TimedRobot {
       System.out.println("Problem occured with loading Camera " + RobotMap.Sensors.CAMERA_LIFT);
     }
 
-    OI.init();
-
     drive = new Drive();
     lift = new Lift();
     wrist = new Wrist();
     intake = new Intake();
-    hatch = new Hatch();
 
     compressor = new Compressor();
     compressor.setClosedLoopControl(RobotMap.Config.ENABLE_PNEUMATICS);
 
-    led = new DigitalOutput(RobotMap.Sensors.LED_STRIP);
+    OI.init();
 
-    System.out.println("Robot has turned on");
+    led = new DigitalOutput(RobotMap.Sensors.LED_STRIP);
   }
   
   private void updateLED() {
@@ -89,44 +76,27 @@ public class Robot extends TimedRobot {
   private void postDashboardValues() {
     
     SmartDashboard.putNumber("raw lift encoder value", lift.getEncoderRaw());
-    SmartDashboard.putNumber("scaled lift encoder value", lift.getEncoderScaled());
 
     //Preferences.getInstance()
     
     SmartDashboard.putBoolean("compresssor pressurized", compressor.getPressureSwitchValue());
     SmartDashboard.putBoolean("Lift PID enabled ", lift.getPIDenabled());
-
-    SmartDashboard.putBoolean("Lift Bottomed Out", lift.bottomedOut());
+    SmartDashboard.putBoolean("hatch mode", intake.getHatchMode());
+    //SmartDashboard.putBoolean("Lift Bottomed Out", lift.bottomedOut());
 
     SmartDashboard.putBoolean("front jack", drive.getFrontJackState());
     SmartDashboard.putBoolean("back jack", drive.getBackJackState());
 
-    String intakeText = "";
-    switch(intake.intakeState) {
-      case IN: intakeText = "taking in";
-      break;
-      case OUT: intakeText = "going out";
-      break;
-      case STOPPED: intakeText = "stopped"; 
-    }
+    // String intakeText = "";
+    // switch(intake.intakeState) {
+    //   case IN: intakeText = "taking in";
+    //   break;
+    //   case OUT: intakeText = "going out";
+    //   break;
+    //   case STOPPED: intakeText = "stopped"; 
+    // }
 
-    SmartDashboard.putString("intake is ", intakeText);
-  }
-
-  private void bindButtons() {
-    
-    OI.logitechF310.x.whenPressed(new ToggleFrontJack());
-    OI.logitechF310.y.whenPressed(new ToggleBackJack());
-
-    OI.logitechF310.lefJoystickButton.whenPressed(new IntakeOut());
-    OI.logitechF310.righJoystickButton.whileHeld(new PoweredIntakeIn());
-    
-    OI.logitechF310.back.whenPressed(new TogglePIDEnabled());
-    
-    OI.logitechF310.a.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.GROUND));
-    OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.CARGO));
-    // OI.logitechF310.start.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.SHIP_LV3));
-    
+    // SmartDashboard.putString("intake is ", intakeText);
   }
   
   @Override
@@ -134,7 +104,6 @@ public class Robot extends TimedRobot {
   }
 
   private void commonInit() {
-    bindButtons();
     postDashboardValues();
   }
 

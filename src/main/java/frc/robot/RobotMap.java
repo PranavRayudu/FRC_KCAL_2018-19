@@ -11,34 +11,53 @@ public class RobotMap {
 
   public class Config {
     public static final boolean ENABLE_PNEUMATICS = true; 
-    public static final boolean ENABLE_MOTORS = true;
+    public static final boolean ENABLE_MOTORS     = true;
+    
+    public static final boolean LIFT_PID_ENABLED  = true;
+
+    public static final boolean LIFT_REVERSED     = true;
+    public static final boolean WRIST_REVERSED    = true;
   }
 
   public class Constants {
-    public static final double INTAKE_DEAD_PWR  = 0.15f;
-    public static final double INTAKE_IN_PWR    = 0.50f;
-    public static final double INTAKE_OUT_PWR   =-0.90f;
-    
-    public static final double WRIST_CTRL_PWR   =-0.50f;
-    public static final double WRIST_AUTO_PWR   = 0.20f;
-    public static final double WRIST_DEAD_PWR   =-0.08f;
 
-    public static final double DRIVE_HIGH       = 0.80f;
-    public static final double DRIVE_LOW        = 0.50f;
+    public class Intake {
+      public static final double DEAD_PWR  = 0.15f;
+      public static final double IN_PWR    = 0.50f;
+      public static final double OUT_PWR   =-0.90f;
+    }
     
-    public class kLiftGains {
-      //public static final double kF = 0.0;
-      public static final double kP = 0.30f;
-      public static final double kI = 0.00f;
-      public static final double kD = 0.00f;
-      public static final double tolerance = 10000.0;
-      public static final double highLimit = 900000.0;
+    public class Wrist {
+      public static final double CTRL_PWR       = 0.50f;
+      public static final double INTAKE_PWR     =-0.20f;
+      public static final double DEAD_CARGO_PWR = 0.08f;
+      public static final double DEAD_HATCH_PWR =-0.10f;
+    }
+
+    public class Drive {
+      public static final double HIGH = 0.80f;
+      public static final double LOW  = 0.50f;
+    }
+
+    public class Lift {
+
+      public static final double CTRL_PWR  = 1.00f;
+      public static final double tolerance = 200.0;
+      public static final double highLimit = 100000.0;
+
+      public class kPID {
+        public static final double kF = 0.05f;
+        public static final double kP = 0.001f;
+        public static final double kI = 0.00f;
+        public static final double kD = 0.00f;
+      }
 
       public class setpoints {
-        public static final double GROUND = 0.0;
-        public static final double CARGO = 334028.0;
-        public static final double SHIP_LV2 = 890000;
-        public static final double SHIP_LV3 = 1550000;
+        public static final double GROUND   = 0.0;
+        public static final double CARGO    = 3000.0;
+        public static final double SHIP_LV1 = 4000.0;
+        public static final double SHIP_LV2 = 6000.0;
+        public static final double SHIP_LV3 = 9000.0;
       }
     }
   }

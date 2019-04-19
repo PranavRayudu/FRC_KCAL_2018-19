@@ -28,7 +28,9 @@ public class IntakeIn extends Command {
   @Override
   protected void execute() {
     //Robot.intake.setIntakePwr(IntakeState.IN);
-    Robot.intake.setIntakePwr(RobotMap.Constants.INTAKE_IN_PWR);
+    Robot.intake.setIntakePwr(RobotMap.Constants.Intake.IN_PWR);
+    
+    //Robot.intake.intakeDeadSpeed = RobotMap.Constants.INTAKE_DEAD_PWR;
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +42,6 @@ public class IntakeIn extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.intakeDeadSpeed = RobotMap.Constants.INTAKE_DEAD_PWR;
   }
 
   // Called when another command which requires one or more of the same

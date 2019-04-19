@@ -26,11 +26,11 @@ public class DriveControl extends Command {
   @Override
   protected void execute() {
   
-    double forwardVal = OI.Axes.driveVerticalHighAxis() * RobotMap.Constants.DRIVE_HIGH
-                      + OI.Axes.driveVerticalLowAxis() * RobotMap.Constants.DRIVE_LOW;
-                      
-    double rotVal = OI.Axes.driveHorizontalHighAxis() * RobotMap.Constants.DRIVE_HIGH
-                  + OI.Axes.driveHorizontalLowAxis() * RobotMap.Constants.DRIVE_LOW;
+    double forwardVal = OI.Axes.driveVerticalHighAxis() * RobotMap.Constants.Drive.HIGH
+                      + OI.Axes.driveVerticalLowAxis()  * RobotMap.Constants.Drive.LOW;
+    
+    double rotVal = OI.Axes.driveHorizontalHighAxis() * RobotMap.Constants.Drive.HIGH
+                  + OI.Axes.driveHorizontalLowAxis()  * RobotMap.Constants.Drive.LOW;
 
     Robot.drive.setArcade(forwardVal, rotVal);
   }

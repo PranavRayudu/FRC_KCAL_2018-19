@@ -13,6 +13,7 @@ import frc.robot.commands.Drive.ToggleFrontJack;
 import frc.robot.commands.Intake.IntakeOut;
 import frc.robot.commands.Intake.PoweredIntakeIn;
 import frc.robot.commands.Lift.PIDLift;
+import frc.robot.commands.Lift.PIDLiftSmart;
 import frc.robot.commands.Lift.TogglePIDEnabled;
 import frc.robot.commands.Wrist.ToggleHatchMode;
 
@@ -40,7 +41,8 @@ public class OI {
     OI.logitechF310.start.whenPressed(new ToggleHatchMode());
     
     OI.logitechF310.a.whenPressed(new PIDLift(RobotMap.Constants.Lift.setpoints.GROUND));
-    //OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.kLiftGains.setpoints.CARGO));
+    OI.logitechF310.b.whenPressed(new PIDLiftSmart());
+    //OI.logitechF310.b.whenPressed(new PIDLift(RobotMap.Constants.Lift.setpoints.SHIP_LV2));
   }
 
   public static class Axes {

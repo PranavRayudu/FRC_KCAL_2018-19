@@ -27,7 +27,7 @@ public class LiftControl extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.lift.setPwr(OI.Axes.liftAxis() * RobotMap.Constants.Lift.CTRL_PWR + RobotMap.Constants.Lift.kPID.kF);
+    Robot.lift.setPwr(OI.Axes.liftAxis());// * RobotMap.Constants.Lift.CTRL_PWR + RobotMap.Constants.Lift.kPID.kF);
   }
 
   // Make this return true when this Command no longer needs to run execute()

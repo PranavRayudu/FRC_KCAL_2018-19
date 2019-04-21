@@ -43,19 +43,20 @@ public class RobotMap {
 
       public static final double CTRL_PWR  = 1.00f;
       public static final double tolerance = 200.0;
-      public static final double highLimit = 100000.0;
+      public static final double highLimit = 9000.0;
 
       public class kPID {
-        public static final double kF = 0.05f;
-        public static final double kP = 0.001f;
+        public static final double kF = 0.00f;
+        public static final double kP = 0.2f;
         public static final double kI = 0.00f;
         public static final double kD = 0.00f;
       }
 
       public class setpoints {
-        public static final double GROUND   = 0.0;
-        public static final double CARGO    = 3000.0;
-        public static final double SHIP_LV1 = 4000.0;
+        public static final double GROUND         = 0.0;
+        public static final double CARGO          = 3700.0;
+        public static final double PLAYER_STATION = 1800.0;
+        public static final double SHIP_LV1       = 3000.0;
         public static final double SHIP_LV2 = 6000.0;
         public static final double SHIP_LV3 = 9000.0;
       }
